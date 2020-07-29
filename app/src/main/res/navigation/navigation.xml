@@ -48,7 +48,7 @@
     android:id="@+id/transaction_fragment"
     android:name="edu.cnm.deepdive.budgetmanager.TransactionFragment"
     android:label="fragment_transaction"
-    tools:layout="@layout/fragment_transaction"/>
+    tools:layout="@layout/fragment_transaction">
 
     <action
       android:id="@+id/transaction_to_category_detail"
@@ -58,11 +58,13 @@
     android:id="@+id/transaction_to_budget"
     app:destination="@id/budget_fragment"/>
 
+  </fragment>
+
       <fragment
         android:id="@+id/category_detail_fragment"
         android:name="edu.cnm.deepdive.budgetmanager.CategoryDetailFragment"
         android:label="fragment_category_detail"
-        tools:layout="@layout/fragment_category_detail"/>
+        tools:layout="@layout/fragment_category_detail">
 
   <action
     android:id="@+id/category_detail_to_budget"
@@ -71,5 +73,6 @@
   <action
     android:id="@+id/category_detail_to_transaction"
     app:destination="@id/transaction_fragment"/>
+      </fragment>
 
 </navigation>
