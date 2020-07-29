@@ -9,7 +9,7 @@
 
   <fragment
     android:id="@+id/login_fragment"
-    android:name="edu.cnm.deepdive.budgetmanager.LoginFragment"
+    android:name="edu.cnm.deepdive.budgetmanager.controller.LoginFragment"
     android:label="fragment_home"
     tools:layout="@layout/fragment_login">
 
@@ -20,7 +20,7 @@
 
   <fragment
     android:id="@+id/home_fragment"
-    android:name="edu.cnm.deepdive.budgetmanager.HomeFragment"
+    android:name="edu.cnm.deepdive.budgetmanager.controller.HomeFragment"
     android:label="fragment_home"
     tools:layout="@layout/fragment_home">
 
@@ -35,7 +35,7 @@
 
   <fragment
     android:id="@+id/budget_fragment"
-    android:name="edu.cnm.deepdive.budgetmanager.BudgetFragment"
+    android:name="edu.cnm.deepdive.budgetmanager.controller.BudgetFragment"
     android:label="fragment_budget"
     tools:layout="@layout/fragment_budget">
 
@@ -46,7 +46,7 @@
 
   <fragment
     android:id="@+id/transaction_fragment"
-    android:name="edu.cnm.deepdive.budgetmanager.TransactionFragment"
+    android:name="edu.cnm.deepdive.budgetmanager.controller.TransactionFragment"
     android:label="fragment_transaction"
     tools:layout="@layout/fragment_transaction">
 
@@ -62,7 +62,7 @@
 
       <fragment
         android:id="@+id/category_detail_fragment"
-        android:name="edu.cnm.deepdive.budgetmanager.CategoryDetailFragment"
+        android:name="edu.cnm.deepdive.budgetmanager.controller.CategoryDetailFragment"
         android:label="fragment_category_detail"
         tools:layout="@layout/fragment_category_detail">
 

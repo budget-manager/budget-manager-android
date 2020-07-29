@@ -1,7 +1,8 @@
-package edu.cnm.deepdive.budgetmanager;
+package edu.cnm.deepdive.budgetmanager.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import edu.cnm.deepdive.budgetmanager.R;
 
 public class MainActivity extends AppCompatActivity {
 
