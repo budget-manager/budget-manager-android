@@ -7,67 +7,42 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   tools:context=".controller.LoginFragment">
 
-    <TextView
-      android:id="@+id/budget_manager"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Budget Manager"
-      android:textStyle="bold|italic"
-      android:layout_margin="@dimen/full_margin"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintBottom_toTopOf="@id/empty_space"
-      />
+  <TextView
+    android:id="@+id/budget_manager"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Budget Manager"
+    android:textStyle="bold|italic"
+    android:layout_margin="@dimen/full_margin"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/empty_space"
+    />
 
-    <TextView
-      android:id="@+id/empty_space"
-      android:layout_width="wrap_content"
-      android:layout_height="250dp"
-      android:layout_margin="@dimen/full_margin"
-      android:text="Designed and programmed by Mercedes Garcia, Jan Gevaert and Jeremy Brown"
-      app:layout_constraintBottom_toTopOf="@id/user_id"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.0"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/budget_manager"/>
+  app:layout_constraintBottom_toTopOf="@id/user_id"
+  <TextView
+    android:id="@+id/empty_space"
+    android:layout_width="wrap_content"
+    android:layout_height="250dp"
+    android:layout_margin="25dp"
+    android:layout_marginStart="25dp"
+    android:layout_marginEnd="8dp"
+    android:text="Designed and programmed by Mercedes Garcia, Jan Gevaert and Jeremy Brown"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/budget_manager"
+    app:layout_constraintEnd_toEndOf="parent"
+    />
 
-    <EditText
-      android:id="@+id/user_id"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="User ID"
-      android:textStyle="bold"
-      android:layout_margin="@dimen/full_margin"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/empty_space"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintBottom_toTopof="password"
-      />
-
-    <EditText
-      android:id="@+id/password"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:hint="Password"
-      android:layout_margin="@dimen/full_margin"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/user_id"
-      app:layout_constraintEnd_toEndOf="parent"
-      />
-
-    <Button
-      android:id="@+id/login_button"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Login"
-      android:layout_margin="@dimen/full_margin"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/password"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintVertical_bias="0.9"
-      />
+  <com.google.android.gms.common.SignInButton
+    android:id="@+id/sign_in"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/login_button_padding"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
