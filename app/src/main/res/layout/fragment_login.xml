@@ -9,40 +9,74 @@
 
   <TextView
     android:id="@+id/budget_manager"
+    android:textSize="40dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Budget Manager"
-    android:textStyle="bold|italic"
+    android:textStyle="italic"
     android:layout_margin="@dimen/full_margin"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toTopOf="@id/empty_space"
+    app:layout_constraintBottom_toTopOf="@id/designed_by"
     />
 
-  app:layout_constraintBottom_toTopOf="@id/user_id"
   <TextView
-    android:id="@+id/empty_space"
+    android:id="@+id/designed_by"
     android:layout_width="wrap_content"
-    android:layout_height="250dp"
-    android:layout_margin="25dp"
-    android:layout_marginStart="25dp"
-    android:layout_marginEnd="8dp"
-    android:text="Designed and programmed by Mercedes Garcia, Jan Gevaert and Jeremy Brown"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:text="Designed and programmed by:"
+    app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/budget_manager"
-    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/Mercedes_Garcia"
     />
+
+  <TextView
+    android:id="@+id/Mercedes_Garcia"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Mercedes Garcia"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/designed_by"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/Jan_Gevaert"
+    />
+
+  <TextView
+    android:id="@+id/Jan_Gevaert"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Jan Gevaert"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/Mercedes_Garcia"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/Jeremy_Brown"
+    />
+
+  <TextView
+    android:id="@+id/Jeremy_Brown"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Jeremy Brown"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/Jan_Gevaert"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/sign_in"
+    />
+
 
   <com.google.android.gms.common.SignInButton
     android:id="@+id/sign_in"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="@dimen/login_button_padding"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"/>
+    app:layout_constraintTop_toBottomOf="@id/Jeremy_Brown"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
