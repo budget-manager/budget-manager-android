@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import edu.cnm.deepdive.budgetmanager.R;
+import edu.cnm.deepdive.budgetmanager.model.Budget;
 import java.util.List;
 
 public class BudgetAdapter extends RecyclerView.Adapter<BudgetAdapter.Holder> {
@@ -17,6 +18,13 @@ public class BudgetAdapter extends RecyclerView.Adapter<BudgetAdapter.Holder> {
   private final List<Budget> budgets;
   private final OnClickListener clickListener;
 
+  public BudgetAdapter(Context context, List<Budget> budgets, OnClickListener clickListener) {
+    this.context = context;
+    this.budgets = budgets;
+    this.clickListener = clickListener;
+  }
+
+  @Override
   public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     View view = LayoutInflater.from(context).inflate(R.layout.item_budget, parent, false);
     return new Holder(view);
@@ -38,7 +46,7 @@ public class BudgetAdapter extends RecyclerView.Adapter<BudgetAdapter.Holder> {
     private final TextView budgetCategory;
     private final TextView thresholdPercent;
 
-    public Holder (@NonNull View itemView) {
+    public Holder (View itemView) {
       super(itemView);
       this.itemView = itemView;
       thresholdPercent = itemView.findViewById(R.id.threshold_percent);

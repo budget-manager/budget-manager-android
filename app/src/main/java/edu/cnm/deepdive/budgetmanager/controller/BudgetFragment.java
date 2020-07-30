@@ -1,11 +1,16 @@
 package edu.cnm.deepdive.budgetmanager.controller;
 
 import android.os.Bundle;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import edu.cnm.deepdive.budgetmanager.model.Budget;
 import edu.cnm.deepdive.budgetmanager.R;
 import edu.cnm.deepdive.budgetmanager.view.BudgetAdapter;
 import edu.cnm.deepdive.budgetmanager.viewModel.MainViewModel;
@@ -18,16 +23,37 @@ public class BudgetFragment extends Fragment implements BudgetAdapter.OnClickLis
 
   private MainViewModel mainViewModel;
   private RecyclerView budgetList;
+  private FloatingActionButton add;
 
-  public BudgetFragment() {
-    // Required empty public constructor
+  public View onCreateView(@NonNull LayoutInflater inflater,
+      ViewGroup container, Bundle savedInstanceState) {
+    View view = inflater.inflate(R.layout.fragment_budget, container, false);
+    budgetList = view.findViewById(R.id.budget_list);
+    add = view.findViewById(R.id.add);
+    add.setOnClickListener((v) -> editBudget(0));
+    return view;
+  }
+
+  @Override
+  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    mainViewModel = new ViewModelProvider(getActivity())
+        .get(MainViewModel.class);
+    mainViewModel.getBudgets().observe(getViewLifecycleOwner(), (goals) -> {
+      BudgetAdapter adapter =
+          new BudgetAdapter(getContext(), budgets, this);
+      budgetList.setAdapter(adapter);
+    });
+  }
+
+  @Override
+  public void onClick(View view, int position, Budget budget) {
+    editBudget(budget.getId());
   }
 
 
-  @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
-    // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_budget, container, false);
+  private void editBudget(long budgetId) {
+    BudgetEditFragment fragment = BudgetEditFragment.newInstance(budgetId);
+    fragment.show(getChildFragmentManager(), fragment.getClass().getName());
   }
 }
