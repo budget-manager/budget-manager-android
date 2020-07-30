@@ -16,7 +16,7 @@ public class BudgetAdapter extends RecyclerView.Adapter<BudgetAdapter.Holder> {
 
   private final Context context;
   private final List<Budget> budgets;
-  private final OnClickListener clickListener;
+  private static final OnClickListener clickListener;
 
   public BudgetAdapter(Context context, List<Budget> budgets, OnClickListener clickListener) {
     this.context = context;
@@ -40,7 +40,7 @@ public class BudgetAdapter extends RecyclerView.Adapter<BudgetAdapter.Holder> {
     return budgets.size();
   }
 
-      class Holder extends RecyclerView.ViewHolder {
+      static class Holder extends RecyclerView.ViewHolder {
 
     private final View itemView;
     private final TextView budgetCategory;
@@ -49,19 +49,20 @@ public class BudgetAdapter extends RecyclerView.Adapter<BudgetAdapter.Holder> {
     public Holder (View itemView) {
       super(itemView);
       this.itemView = itemView;
-      thresholdPercent = itemView.findViewById(R.id.threshold_percent);
-      budgetCategory = itemView.findViewById(R.id.budget);
+      thresholdPercent = itemView.findViewById(R.id.threshold_percent_showable);
+      budgetCategory = itemView.findViewById(R.id.budget_list);
     }
 
     private void bind(int position) {
       Budget item = budgets.get(position);
       budgetCategory.setText(item.getName());
-      thresholdPercent.setText(item.getThresholdPercent());
+      thresholdPercent.setText(Budget.getThresholdPercent());
       itemView.setOnClickListener((v) -> clickListener.onClick(v, getAdapterPosition(), item));
     }
 
-    public interface OnClickListener {
-      void onClick(View view, int position, Budget budget);
-    }
+        public interface OnClickListener {
+
+          void onClick(View view, int position, Budget budget);
+        }
       }
   }

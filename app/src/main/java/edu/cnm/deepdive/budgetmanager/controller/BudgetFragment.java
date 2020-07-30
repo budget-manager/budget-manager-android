@@ -48,14 +48,15 @@ public class BudgetFragment extends Fragment implements BudgetAdapter.OnClickLis
     });
   }
 
-  @Override
-  public void onClick(View view, int position, Budget budget) {
-    editBudget(budget.getId());
-  }
+//  @Override
+//  public void onClick(View view, int position, Budget budget) {
+//    editBudget(budget.getId());
+//  }
 
 
   private void editBudget(long budgetId) {
     BudgetEditFragment fragment = BudgetEditFragment.newInstance(budgetId);
     fragment.show(getChildFragmentManager(), fragment.getClass().getName());
   }
+
 }
