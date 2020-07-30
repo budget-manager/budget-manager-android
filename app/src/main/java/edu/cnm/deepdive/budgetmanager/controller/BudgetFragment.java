@@ -5,13 +5,19 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.recyclerview.widget.RecyclerView;
 import edu.cnm.deepdive.budgetmanager.R;
+import edu.cnm.deepdive.budgetmanager.view.BudgetAdapter;
+import edu.cnm.deepdive.budgetmanager.viewModel.MainViewModel;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BudgetFragment extends Fragment {
+public class BudgetFragment extends Fragment implements BudgetAdapter.OnClickListener {
+
+  private MainViewModel mainViewModel;
+  private RecyclerView budgetList;
 
   public BudgetFragment() {
     // Required empty public constructor
