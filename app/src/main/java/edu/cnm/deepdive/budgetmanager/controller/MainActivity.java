@@ -6,8 +6,10 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.lifecycle.ViewModelProvider;
 import edu.cnm.deepdive.budgetmanager.R;
 import edu.cnm.deepdive.budgetmanager.service.GoogleSignInService;
+import edu.cnm.deepdive.budgetmanager.viewModel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);
   }
+
+
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -47,4 +51,21 @@ public class MainActivity extends AppCompatActivity {
     }
     return handled;
   }
+
+  // TODO implement when ViewModel has been created
+//  private void setupViewModel() {
+//    MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+//    getLifecycle().addObserver(viewModel);
+//  }
+
+
+  private void signOut() {
+    GoogleSignInService.getInstance().signOut()
+        .addOnCompleteListener((task) -> {
+          Intent intent = new Intent(this, LoginActivity.class);
+          intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+          startActivity(intent);
+        });
+  }
+
 }
