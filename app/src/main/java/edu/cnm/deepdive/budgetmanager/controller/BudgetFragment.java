@@ -14,6 +14,7 @@ import edu.cnm.deepdive.budgetmanager.model.Budget;
 import edu.cnm.deepdive.budgetmanager.R;
 import edu.cnm.deepdive.budgetmanager.view.BudgetAdapter;
 import edu.cnm.deepdive.budgetmanager.viewModel.MainViewModel;
+import java.util.List;
 
 
 /**
@@ -24,6 +25,7 @@ public class BudgetFragment extends Fragment implements BudgetAdapter.OnClickLis
   private MainViewModel mainViewModel;
   private RecyclerView budgetList;
   private FloatingActionButton add;
+  private List<Budget> budgets;
 
   public View onCreateView(@NonNull LayoutInflater inflater,
       ViewGroup container, Bundle savedInstanceState) {
