@@ -10,9 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import edu.cnm.deepdive.budgetmanager.R;
 import edu.cnm.deepdive.budgetmanager.model.Budget;
+import edu.cnm.deepdive.budgetmanager.view.BudgetAdapter.Holder;
 import java.util.List;
 
-public class BudgetAdapter extends RecyclerView.Adapter<BudgetAdapter.Holder> {
+public class BudgetAdapter extends RecyclerView.Adapter<Holder> {
 
   private final Context context;
   private final List<Budget> budgets;

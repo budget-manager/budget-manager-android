@@ -41,7 +41,7 @@ public class BudgetFragment extends Fragment implements BudgetAdapter.OnClickLis
     super.onViewCreated(view, savedInstanceState);
     mainViewModel = new ViewModelProvider(getActivity())
         .get(MainViewModel.class);
-    mainViewModel.getBudgets().observe(getViewLifecycleOwner(), (goals) -> {
+    mainViewModel.getBudgets().observe(getViewLifecycleOwner(), (budgets) -> {
       BudgetAdapter adapter =
           new BudgetAdapter(getContext(), budgets, this);
       budgetList.setAdapter(adapter);
