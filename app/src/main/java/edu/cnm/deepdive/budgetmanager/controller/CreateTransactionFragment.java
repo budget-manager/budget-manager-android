@@ -11,9 +11,9 @@ import edu.cnm.deepdive.budgetmanager.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CategoryDetailFragment extends Fragment {
+public class CreateTransactionFragment extends Fragment {
 
-  public CategoryDetailFragment() {
+  public CreateTransactionFragment() {
     // Required empty public constructor
   }
 
@@ -22,6 +22,6 @@ public class CategoryDetailFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_category_detail, container, false);
+    return inflater.inflate(R.layout.fragment_transaction, container, false);
   }
 }

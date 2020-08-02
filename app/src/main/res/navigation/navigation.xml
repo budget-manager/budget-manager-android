@@ -29,8 +29,8 @@
       app:destination="@id/budget_fragment"/>
 
     <action
-      android:id="@+id/home_to_transaction"
-      app:destination="@id/transaction_fragment"/>
+      android:id="@+id/home_to_create_transaction"
+      app:destination="@id/Create_transaction"/>
   </fragment>
 
   <fragment
@@ -40,19 +40,19 @@
     tools:layout="@layout/fragment_budget">
 
     <action
-      android:id="@+id/budget_to_category_detail"
-      app:destination="@id/category_detail_fragment"/>
+      android:id="@+id/budget_to_transaction"
+      app:destination="@id/transaction_fragment"/>
   </fragment>
 
   <fragment
-    android:id="@+id/transaction_fragment"
-    android:name="edu.cnm.deepdive.budgetmanager.controller.TransactionFragment"
+    android:id="@+id/Create_transaction"
+    android:name="edu.cnm.deepdive.budgetmanager.controller.CreateTransactionFragment"
     android:label="fragment_transaction"
-    tools:layout="@layout/fragment_transaction">
+    tools:layout="@layout/fragment_create_transaction">
 
     <action
-      android:id="@+id/transaction_to_category_detail"
-      app:destination="@id/category_detail_fragment"/>
+      android:id="@+id/create_transaction_to_transaction_fragment"
+      app:destination="@id/transaction_fragment"/>
 
   <action
     android:id="@+id/transaction_to_budget"
@@ -61,18 +61,14 @@
   </fragment>
 
       <fragment
-        android:id="@+id/category_detail_fragment"
-        android:name="edu.cnm.deepdive.budgetmanager.controller.CategoryDetailFragment"
+        android:id="@+id/transaction_fragment"
+        android:name="edu.cnm.deepdive.budgetmanager.controller.TransactionFragment"
         android:label="fragment_category_detail"
-        tools:layout="@layout/fragment_category_detail">
+        tools:layout="@layout/transaction_fragment">
 
   <action
-    android:id="@+id/category_detail_to_budget"
+    android:id="@+id/transaction_to_budget"
     app:destination="@id/budget_fragment"/>
-
-  <action
-    android:id="@+id/category_detail_to_transaction"
-    app:destination="@id/transaction_fragment"/>
       </fragment>
 
 </navigation>

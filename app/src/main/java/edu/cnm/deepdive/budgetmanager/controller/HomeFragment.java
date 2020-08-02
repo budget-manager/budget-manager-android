@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment {
     transactionButton.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View view) {
-        Navigation.findNavController(view).navigate(R.id.home_to_transaction);
+        Navigation.findNavController(view).navigate(R.id.home_to_create_transaction);
       }
     });
     return view;

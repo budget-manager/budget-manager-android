@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.budgetmanager.BuildConfig;
 import edu.cnm.deepdive.budgetmanager.model.Budget;
+import edu.cnm.deepdive.budgetmanager.model.Transaction;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import java.util.List;
@@ -24,21 +25,38 @@ import retrofit2.http.Path;
 public interface BudgetManagerCloudService {
 
   @GET("budgets")
-  Single<List<Budget>> get(@Header("Authorization") String authHeader);
+  Single<List<Budget>> getAllBudgets(@Header("Authorization") String authHeader);
 
   @GET("budgets/{id}")
-  Single<Budget> get(@Header("Authorization") String authHeader, @Path("id") long id);
+  Single<Budget> getBudget(@Header("Authorization") String authHeader, @Path("id") long id);
 
   @POST("budgets")
-  Single<Budget> post(@Header("Authorization") String authHeader, @Body Budget budget);
+  Single<Budget> postBudget(@Header("Authorization") String authHeader, @Body Budget budget);
 
   @PUT("budgets/{id}")
-  Single<Budget> put(@Header("Authorization") String authHeader, @Path("id") long id, @Body Budget budget);
+  Single<Budget> putBudget(@Header("Authorization") String authHeader, @Path("id") long id, @Body Budget budget);
 
   @DELETE("budgets/{id}")
-  Completable delete(@Header("Authorization") String authHeader, @Path("id") long id);
+  Completable deleteBudget(@Header("Authorization") String authHeader, @Path("id") long id);
 
-// TODO Add more method declarations as necessary.
+
+
+
+  @GET("transactions")
+  Single<List<Transaction>> getAllTransactions(@Header("Authorization") String authHeader);
+
+  @GET("transactions/{id}")
+  Single<Transaction> getTransaction(@Header("Authorization") String authHeader, @Path("id") long id);
+
+  @POST("transactions")
+  Single<Transaction> postTransaction(@Header("Authorization") String authHeader, @Body Transaction transaction);
+
+  @PUT("transactions/{id}")
+  Single<Transaction> putTransaction(@Header("Authorization") String authHeader, @Path("id") long id, @Body Transaction transaction);
+
+  @DELETE("transactions/{id}")
+  Completable deleteTransaction(@Header("Authorization") String authHeader, @Path("id") long id);
+
 
   public static BudgetManagerCloudService getInstance() {
     return InstanceHolder.INSTANCE;
