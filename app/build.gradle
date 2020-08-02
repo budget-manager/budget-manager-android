@@ -1,5 +1,15 @@
 apply plugin: 'com.android.application'
 
+def getLocalProperty(String propertyName) {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file("local.properties").newDataInputStream())
+    return properties.getProperty(propertyName)
+}
+
+static def quoted(String value) {
+    return String.format("\"%s\"", value)
+}
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -11,7 +21,8 @@ android {
         versionCode 1
         versionName "1.0"
         // TODO if using Room add Java compile options for schema location (see Quotes)
-
+        buildConfigField "String", "CLIENT_ID", quoted("918425834359-ha55pufu5f76k4porb93k8nmp28jo2nq.apps.googleusercontent.com")
+        buildConfigField "String", "BASE_URL", quoted(getLocalProperty("build_url"))
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
