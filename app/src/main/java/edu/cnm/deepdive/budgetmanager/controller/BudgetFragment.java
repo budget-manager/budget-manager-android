@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.budgetmanager.controller;
 
 import android.os.Bundle;
+import android.view.View.OnClickListener;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -20,7 +21,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BudgetFragment extends Fragment {
+public class BudgetFragment extends Fragment implements BudgetAdapter.OnClickListener {
 
   private MainViewModel mainViewModel;
   private RecyclerView budgetList;
@@ -51,15 +52,14 @@ public class BudgetFragment extends Fragment {
     });
   }
 
-//  @Override
-//  public void onClick(View view, int position, Budget budget) {
-//    editBudget(budget.getId());
-//  }
+  public void onClick(View view, int position, Budget budget) {
+    editBudget(budget.getId());
+  }
 
 
-//  private void editBudget(long budgetId) {
-//    BudgetEditFragment fragment = BudgetEditFragment.newInstance(budgetId);
-//    fragment.show(getChildFragmentManager(), fragment.getClass().getName());
-//  }
+  private void editBudget(long budgetId) {
+    BudgetEditFragment fragment = BudgetEditFragment.newInstance(budgetId);
+    fragment.show(getChildFragmentManager(), fragment.getClass().getName());
+  }
 
 }
