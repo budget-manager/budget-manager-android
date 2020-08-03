@@ -50,10 +50,6 @@
     android:label="fragment_transaction"
     tools:layout="@layout/fragment_create_transaction">
 
-    <action
-      android:id="@+id/create_transaction_to_transaction_fragment"
-      app:destination="@id/transaction_fragment"/>
-
   <action
     android:id="@+id/transaction_to_budget"
     app:destination="@id/budget_fragment"/>
