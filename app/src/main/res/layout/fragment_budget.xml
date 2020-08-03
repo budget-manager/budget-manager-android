@@ -22,7 +22,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Savings 35% of Goal"
-    app:layout_constraintStart_toEndOf="@id/personal_allowance_percent"
+    app:layout_constraintStart_toEndOf="@id/threshold_percent_tracked"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintBottom_toTopOf="@id/monthly_budget"
@@ -32,40 +32,52 @@
     android:id="@+id/monthly_budget"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:text="Monthly Budget"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/personal_allowance_percent"
+    app:layout_constraintTop_toBottomOf="threshold_percent_tracked"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toTopOf="@id/budget_list"
+    app:layout_constraintBottom_toTopOf="@id/budget_category"
     />
 
   <TextView
     android:id="@+id/budget_category"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content"
+    android:text="Gas"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/monthly_budget"
+    app:layout_constraintEnd_toStartOf="@id/budget_current_total"
+    app:layout_constraintBottom_toTopOf="@id/budget_list"/>
 
   <TextView
     android:id="@+id/budget_current_total"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content"
+    android:text="30/60"
+    app:layout_constraintStart_toEndOf="@id/budget_category"
+    app:layout_constraintTop_toBottomOf="@id/monthly_budget"
+    app:layout_constraintEnd_toStartOf="@id/threshold_percent_showable"
+    app:layout_constraintBottom_toTopOf="@id/budget_list"/>
 
   <TextView
     android:id="@+id/threshold_percent_showable"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
-
-  <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content"
+    android:text="50%"
+    app:layout_constraintStart_toEndOf="@id/budget_current_total"
+    app:layout_constraintTop_toBottomOf="@id/monthly_budget"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/budget_list"/>
 
   <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/budget_list"
+    android:id="@id/budget_list"
     android:layout_width="@dimen/fill_space"
     android:layout_height="@dimen/fill_space"
     android:layout_margin="@dimen/half_margin"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     android:orientation="vertical"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/monthly_budget"
+    app:layout_constraintTop_toBottomOf="@id/budget_category"
     app:layout_constraintEnd_toEndOf="parent"
     />
 

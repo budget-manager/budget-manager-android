@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BudgetFragment extends Fragment implements BudgetAdapter.OnClickListener {
+public class BudgetFragment extends Fragment {
 
   private MainViewModel mainViewModel;
   private RecyclerView budgetList;
@@ -34,6 +34,9 @@ public class BudgetFragment extends Fragment implements BudgetAdapter.OnClickLis
     add = view.findViewById(R.id.add);
     add.setOnClickListener((v) -> editBudget(0));
     return view;
+  }
+
+  private void editBudget(int i) {
   }
 
   @Override

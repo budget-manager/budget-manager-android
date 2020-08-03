@@ -12,6 +12,7 @@
     android:textStyle="bold"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/welcome_space"
     android:text="Welcome, User!"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
@@ -23,6 +24,8 @@
     android:id="@+id/budgets_button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/full_margin"
+    android:text="Budgets"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/welcome_message"
     app:layout_constraintEnd_toEndOf="parent"
@@ -30,10 +33,12 @@
     />
 
 
-  <TextView
+  <Button
     android:id="@+id/transaction_button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/full_margin"
+    android:text="Transactions"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/budgets_button"
     app:layout_constraintEnd_toEndOf="parent"
@@ -42,8 +47,9 @@
 
   <TextView
     android:id="@+id/pie_chart"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="0dp"
+    android:layout_margin="40dp"
     android:text="Pie chart to show budget categories"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/transaction_button"

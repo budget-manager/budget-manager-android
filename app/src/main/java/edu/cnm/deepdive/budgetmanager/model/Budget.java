@@ -54,6 +54,7 @@ public class Budget implements Content {
       this.name = name;
     }
 
+
     public long getBudgetedAmount() {
       return budgetedAmount;
     }
