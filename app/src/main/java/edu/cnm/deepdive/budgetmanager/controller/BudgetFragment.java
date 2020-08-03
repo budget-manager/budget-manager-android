@@ -54,9 +54,9 @@ public class BudgetFragment extends Fragment implements BudgetAdapter.OnClickLis
 //  }
 
 
-  private void editBudget(long budgetId) {
-    BudgetEditFragment fragment = BudgetEditFragment.newInstance(budgetId);
-    fragment.show(getChildFragmentManager(), fragment.getClass().getName());
-  }
+//  private void editBudget(long budgetId) {
+//    BudgetEditFragment fragment = BudgetEditFragment.newInstance(budgetId);
+//    fragment.show(getChildFragmentManager(), fragment.getClass().getName());
+//  }
 
 }
