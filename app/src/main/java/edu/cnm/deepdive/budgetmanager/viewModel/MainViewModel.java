@@ -3,15 +3,11 @@ package edu.cnm.deepdive.budgetmanager.viewModel;
 import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import edu.cnm.deepdive.budgetmanager.model.Budget;
 import edu.cnm.deepdive.budgetmanager.service.BudgetRepository;
 import edu.cnm.deepdive.budgetmanager.service.GoogleSignInService;
-import io.reactivex.Single;
 import io.reactivex.disposables.CompositeDisposable;
-import java.sql.SQLTransactionRollbackException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,7 +63,7 @@ public class MainViewModel extends AndroidViewModel {
                       (budgets) -> {
                         this.budgets.postValue(budgets);
                         for (Budget budget : budgets) {
-                          budgetMap.put(budget.getId(), budget);
+                          budgetMap.put(budget.getBudgetId(), budget);
                         }
                       },
                       throwable::postValue
@@ -85,9 +81,9 @@ public class MainViewModel extends AndroidViewModel {
           pending.add(
               budgetRepository.save(account.getIdToken(), budget)
                   .subscribe(
-                      () -> {
-                        this.budget.postValue(null);
-                        refreshBudget();
+                      (budgets) -> {
+                        this.budget.postValue(budgets);
+                        refreshBudgets();
                       },
                       throwable::postValue
                   )
@@ -115,7 +111,7 @@ public class MainViewModel extends AndroidViewModel {
   }
 
 
-  public void setBudgetId(UUID id) {
+  public void setBudgetId(Long id) {
     budget.setValue(budgetMap.get(id));
   }
 

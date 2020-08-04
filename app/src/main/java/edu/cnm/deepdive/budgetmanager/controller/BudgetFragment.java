@@ -1,7 +1,6 @@
 package edu.cnm.deepdive.budgetmanager.controller;
 
 import android.os.Bundle;
-import android.view.View.OnClickListener;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -53,7 +52,7 @@ public class BudgetFragment extends Fragment implements BudgetAdapter.OnClickLis
   }
 
   public void onClick(View view, int position, Budget budget) {
-    editBudget(budget.getId());
+    editBudget(budget.getBudgetId());
   }
 
 

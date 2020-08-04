@@ -8,7 +8,7 @@ import java.util.List;
 public class Budget implements Content {
 
   @Expose
-    private Long id;
+    private Long budgetId;
 
     @Expose
     private User user;
@@ -34,8 +34,8 @@ public class Budget implements Content {
     @Expose
     private boolean recurring;
 
-    public Long getId() {
-      return id;
+    public Long getBudgetId() {
+      return budgetId;
     }
 
     public User getUser() {
@@ -58,6 +58,7 @@ public class Budget implements Content {
     public long getBudgetedAmount() {
       return budgetedAmount;
     }
+
 
     public void setBudgetedAmount(long budgetedAmount) {
       this.budgetedAmount = budgetedAmount;

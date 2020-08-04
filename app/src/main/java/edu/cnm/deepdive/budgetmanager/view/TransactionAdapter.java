@@ -27,7 +27,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
   public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     View view = LayoutInflater.from(context).inflate(R.layout.item_transaction, parent, false);
-    return new TransactionAdapter(view);
+    return new Holder(view);
   }
 
   @Override
@@ -55,8 +55,9 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     private void bind(int position) {
       Transaction item = transactions.get(position);
-      transactionName.setText(item.getName());
-      amount.setText(item.getAmount());
+//      transactionName.setName(item.getName());
+//      amount.setText(item.getAmount());
+      // TODO Correct red lines.
       itemView.setOnClickListener((v) -> clickListener.onClick(v, getAdapterPosition(), item));
     }
   }

@@ -111,9 +111,9 @@ public class BudgetEditFragment extends DialogFragment implements TextWatcher {
       viewModel.getBudget().observe(getViewLifecycleOwner(), (budget) -> {
         this.budget = budget;
         if (budget != null) {
+          this.budget = budget;
           budgetText.setText(budget.getName());
-          budgetAmount.setText(budget.getBudget());
-//              != null) ? quote.getSource().getName() : "");
+          budgetAmount.setText((int) budget.getBudgetedAmount());
         }
       });
       viewModel.setBudgetId(budgetId);

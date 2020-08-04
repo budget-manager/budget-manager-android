@@ -18,7 +18,7 @@ public class Transaction {
   private long amount;
 
   @Expose
-  private String name;
+  private String name = "";
 
   @Expose
   private String note;
