@@ -3,6 +3,8 @@ package edu.cnm.deepdive.budgetmanager.service;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
+import android.util.Log;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -11,7 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
-//import edu.cnm.deepdive.budgetmanager.BuildConfig;
+import edu.cnm.deepdive.budgetmanager.BuildConfig;
 
 public class GoogleSignInService {
 
@@ -28,7 +30,7 @@ public class GoogleSignInService {
         .requestEmail()
         .requestId()
         .requestProfile()
-//      .requestIdToken(BuildConfig.CLIENT_ID)
+      .requestIdToken(BuildConfig.CLIENT_ID)
         .build();
     client = GoogleSignIn.getClient(context, options);
   }
@@ -62,6 +64,12 @@ public class GoogleSignInService {
     activity.startActivityForResult(intent, requestCode);
   }
 
+  public void startSignIn(Fragment fragment, int requestCode) {
+    update((GoogleSignInAccount) null);
+    Intent intent = client.getSignInIntent();
+    fragment.startActivityForResult(intent, requestCode);
+  }
+
   public Task<GoogleSignInAccount> completeSignIn(Intent data) {
     Task<GoogleSignInAccount> task = null;
     try {
@@ -79,6 +87,9 @@ public class GoogleSignInService {
   }
 
   private void update(GoogleSignInAccount account) {
+    if (account != null) {
+      Log.d(getClass().getName(), "Bearer " + account.getIdToken());
+    }
     this.account.setValue(account);
     this.throwable.setValue(null);
   }

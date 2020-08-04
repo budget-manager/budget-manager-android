@@ -27,8 +27,8 @@ public class HomeFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_home, container, false);
-    Button budgetButton = view.findViewById(R.id.budget_fragment);
-    Button transactionButton = view.findViewById(R.id.transaction_fragment);
+    Button budgetButton = view.findViewById(R.id.budgets_button);
+    Button transactionButton = view.findViewById(R.id.transaction_button);
 
     budgetButton.setOnClickListener(new OnClickListener() {
       @Override

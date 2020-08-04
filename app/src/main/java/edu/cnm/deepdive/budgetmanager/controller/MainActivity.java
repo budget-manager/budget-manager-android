@@ -7,6 +7,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import edu.cnm.deepdive.budgetmanager.R;
 import edu.cnm.deepdive.budgetmanager.service.GoogleSignInService;
 import edu.cnm.deepdive.budgetmanager.viewModel.MainViewModel;
@@ -14,6 +18,7 @@ import edu.cnm.deepdive.budgetmanager.viewModel.MainViewModel;
 public class MainActivity extends AppCompatActivity {
 
    private GoogleSignInService signInService;
+   private NavController navController;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
 
     signInService = GoogleSignInService.getInstance();
+    setUpNavigation();
   }
 
   private void switchToLogin() {
@@ -52,6 +58,15 @@ public class MainActivity extends AppCompatActivity {
     return handled;
   }
 
+  private void setUpNavigation() {
+    navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+    AppBarConfiguration config = new AppBarConfiguration.Builder(
+        R.id.navigation_budget, R.id.navigation_create_transaction, R.id.navigation_home,
+        R.id.navigation_login, R.id.navigation_transaction
+    )
+        .build();
+    NavigationUI.setupActionBarWithNavController(this, navController, config);
+  }
   // TODO implement when ViewModel has been created
 //  private void setupViewModel() {
 //    MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
