@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -30,9 +31,10 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void switchToLogin() {
-    Intent intent = new Intent(this, LoginActivity.class);
-    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-    startActivity(intent);
+    NavOptions options = new NavOptions.Builder()
+        .setPopUpTo(R.id.navigation, true)
+        .build();
+    navController.navigate(R.id.navigation_login, null, options);
   }
 
 
@@ -74,13 +76,5 @@ public class MainActivity extends AppCompatActivity {
 //  }
 
 
-  private void signOut() {
-    GoogleSignInService.getInstance().signOut()
-        .addOnCompleteListener((task) -> {
-          Intent intent = new Intent(this, LoginActivity.class);
-          intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-          startActivity(intent);
-        });
-  }
 
 }

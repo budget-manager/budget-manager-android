@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'androidx.navigation.safeargs'
 
 def getLocalProperty(String propertyName) {
     Properties properties = new Properties()
@@ -45,17 +46,10 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    // TODO add dependencies for Lifecycle extensions.
-    // TODO add dependencies (for the Google play authentication) for sign in.
-    // TODO add dependencies for Json if consuming Json based webservice.
-    // TODO add dependencies for retrofit if consuming a webservice of any type.
-    // TODO if using local database, add Room dependencies.
     // TODO if loading images over the web, add Picasso dependency.
     // TODO if doing any kind of database or preload on local system, add the appropriate deserializer.
     // TODO for licensing: add Google play services OSS dependency.
 
-    implementation 'androidx.navigation:navigation-fragment:2.3.0'
-    implementation 'androidx.navigation:navigation-ui:2.3.0'
 
     // Basic AndroidX dependencies.
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -90,18 +84,10 @@ dependencies {
     // Google Sign-In dependencies.
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
 
-    testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
     // Stetho (inspection) dependency
     implementation 'com.facebook.stetho:stetho:1.5.1'
 
-
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'androidx.room:room-runtime:2.2.5'
-    annotationProcessor 'androidx.room:room-compiler:2.2.5'
 }

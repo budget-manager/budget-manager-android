@@ -30,19 +30,11 @@ public class HomeFragment extends Fragment {
     Button budgetButton = view.findViewById(R.id.budgets_button);
     Button transactionButton = view.findViewById(R.id.transaction_button);
 
-    budgetButton.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Navigation.findNavController(view).navigate(R.id.home_to_budgets);
-      }
-    });
+    budgetButton.setOnClickListener(
+        (v) -> Navigation.findNavController(v).navigate(HomeFragmentDirections.homeToBudgets()));
 
-    transactionButton.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Navigation.findNavController(view).navigate(R.id.home_to_create_transaction);
-      }
-    });
+    transactionButton.setOnClickListener(
+        (v) -> Navigation.findNavController(v).navigate(HomeFragmentDirections.homeToCreateTransaction()));
     return view;
   }
 
