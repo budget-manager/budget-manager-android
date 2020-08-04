@@ -2,6 +2,7 @@ package edu.cnm.deepdive.budgetmanager.service;
 
 import android.content.Context;
 import edu.cnm.deepdive.budgetmanager.model.Budget;
+import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
 import java.util.List;
@@ -24,21 +25,30 @@ public class BudgetRepository {
   }
 
   public Single<List<Budget>> get(String idToken) {
-    return cloudService.get(getHeader(idToken))
+    return cloudService.getAllBudgets(getHeader(idToken))
         .subscribeOn(Schedulers.from(networkPool));
   }
 
   public Single<Budget> get(String idToken, long id) {
-    return cloudService.get(getHeader(idToken), id)
+    return cloudService.getBudget(getHeader(idToken), id)
         .subscribeOn(Schedulers.from(networkPool));
   }
 
   public Single<Budget> save(String idToken, Budget budget) {
     Single<Budget> task = (budget.getId()==0)
-        ? cloudService.post(getHeader(idToken), budget)
-        : cloudService.put(getHeader(idToken), budget.getId(), budget);
+        ? cloudService.postBudget(getHeader(idToken), budget)
+        : cloudService.putBudget(getHeader(idToken), budget.getId(), budget);
     return task
         .subscribeOn(Schedulers.from(networkPool));
+  }
+
+  public Completable remove(String token, Budget budget) {
+    if (budget.getId() != null) {
+      return cloudService.deleteBudget(String.format(AUTH_HEADER_FORMAT, token), budget.getId())
+          .subscribeOn(Schedulers.from(networkPool));
+    } else {
+      return Completable.complete();
+    }
   }
 
 

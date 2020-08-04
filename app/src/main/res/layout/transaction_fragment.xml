@@ -14,9 +14,9 @@
     android:text="Savings 35% of Goal"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintEnd_toStartOf="tracker"
-    app:layout_constraintBottom_toTopOf="previous_transaction"
+    app:layout_constraintEnd_toEndOf="parent"
     />
+<!-- TODO add constraints above.-->
 
   <androidx.recyclerview.widget.RecyclerView
     android:layout_width="match_parent"

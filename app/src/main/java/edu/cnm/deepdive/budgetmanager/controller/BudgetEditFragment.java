@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +24,7 @@ import edu.cnm.deepdive.budgetmanager.viewModel.MainViewModel;
  * A simple {@link Fragment} subclass. Use the {@link BudgetEditFragment#newInstance} factory method
  * to create an instance of this fragment.
  */
-public class BudgetEditFragment extends DialogFragment {
+public class BudgetEditFragment extends DialogFragment implements TextWatcher {
 
   private static final String ID_KEY = "budget_id";
 
@@ -60,7 +61,7 @@ public class BudgetEditFragment extends DialogFragment {
   public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
     root = LayoutInflater.from(getContext()).inflate(R.layout.fragment_budget_edit, null, false);
     budgetText = root.findViewById(R.id.budget_text);
-    budgetAmount = root.findViewById(R.id.budget_amount);
+//    budgetAmount = root.findViewById(R.id.budget_amount);
          budgetText.addTextChangedListener(this);
     dialog = new AlertDialog.Builder(getContext())
 //        .setIcon(R.drawable.ic_message)
@@ -86,7 +87,7 @@ public class BudgetEditFragment extends DialogFragment {
 //        }
 //      }
 //    }
-    viewModel.saveBudget(budget);
+    viewModel.save(budget);
   }
 
   @Override
@@ -111,7 +112,7 @@ public class BudgetEditFragment extends DialogFragment {
         this.budget = budget;
         if (budget != null) {
           budgetText.setText(budget.getName());
-          budgetAmount.setText(budget.getBudgetedAmount());
+          budgetAmount.setText(budget.getBudget());
 //              != null) ? quote.getSource().getName() : "");
         }
       });
