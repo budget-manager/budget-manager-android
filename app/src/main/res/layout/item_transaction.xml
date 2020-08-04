@@ -9,13 +9,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="Name"
-    app:layout_constraintTop_toTopOf="parent"/>
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"/>
 
   <TextView
     android:id="@+id/transaction_amount"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-app:layout_constraintStart_toEndOf="@id/transaction_name"
+    app:layout_constraintStart_toEndOf="@id/transaction_name"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     />

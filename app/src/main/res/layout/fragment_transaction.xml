@@ -8,10 +8,10 @@
   tools:context=".controller.CreateTransactionFragment">
 
   <TextView
-    android:id="@+id/category_goal"
+    android:id="@+id/goal_threshold_percent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:text="Savings 35% of Goal"
+    android:text="35% of Goal"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
