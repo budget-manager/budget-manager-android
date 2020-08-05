@@ -1,12 +1,10 @@
 package edu.cnm.deepdive.budgetmanager.controller;
 
-import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
@@ -14,7 +12,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import edu.cnm.deepdive.budgetmanager.R;
 import edu.cnm.deepdive.budgetmanager.service.GoogleSignInService;
-import edu.cnm.deepdive.budgetmanager.viewModel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
 

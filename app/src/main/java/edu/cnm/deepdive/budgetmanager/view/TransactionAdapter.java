@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import edu.cnm.deepdive.budgetmanager.R;
+import edu.cnm.deepdive.budgetmanager.controller.TransactionFragment;
 import java.util.List;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.Holder> {
@@ -24,6 +25,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     this.transactions = transactions;
     this.clickListener = clickListener;
   }
+
 
   public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     View view = LayoutInflater.from(context).inflate(R.layout.item_transaction, parent, false);

@@ -8,27 +8,24 @@
   xmlns:tools="http://schemas.android.com/tools">
 
 
-    <com.google.android.material.textfield.TextInputLayout
-      android:id="@id/transaction_name"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      app:hintEnabled="true"
-      app:hintAnimationEnabled="true"
-      android:layout_margin="@dimen/half_margin"
-      android:layout_marginTop="@dimen/fill_space"
-      app:layout_constraintTop_toTopOf="parent">
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@id/transaction_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:hintEnabled="true"
+    app:hintAnimationEnabled="true"
+    android:layout_margin="@dimen/full_margin"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/budget_category_layout"
+    app:layout_constraintStart_toStartOf="parent">
 
     <com.google.android.material.textfield.TextInputEditText
       android:id="@+id/transaction_name"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:inputType="text"
-      android:maxLines="2"
-      android:layout_margin="@dimen/half_margin"
-      android:hint="@string/transaction_name"
-      app:layout_constraintTop_toTopOf="parent"
-      />
-    </com.google.android.material.textfield.TextInputLayout>
+      android:hint="@string/transaction_name"/>
+  </com.google.android.material.textfield.TextInputLayout>
 
   <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/budget_category_layout"
@@ -36,15 +33,16 @@
     android:layout_height="wrap_content"
     app:hintEnabled="true"
     app:hintAnimationEnabled="true"
-    android:layout_margin="@dimen/half_margin"
-    app:layout_constraintTop_toBottomOf="@id/transaction_name">
+    android:layout_margin="@dimen/full_margin"
+    app:layout_constraintTop_toBottomOf="@id/transaction_name"
+    app:layout_constraintBottom_toTopOf="@id/transaction_amount_layout"
+    app:layout_constraintStart_toStartOf="parent">
 
     <AutoCompleteTextView
       android:id="@+id/budget_category"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:inputType="text"
-      android:layout_margin="@dimen/half_margin"
       android:hint="@string/budget_category"/>
 
   </com.google.android.material.textfield.TextInputLayout>
@@ -54,17 +52,18 @@
     android:id="@+id/transaction_amount_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/half_margin"
+    android:layout_margin="@dimen/full_margin"
     app:hintEnabled="true"
     app:hintAnimationEnabled="true"
-    app:layout_constraintTop_toBottomOf="@id/budget_category_layout">
+    app:layout_constraintTop_toBottomOf="@id/budget_category_layout"
+    app:layout_constraintBottom_toTopOf="@id/transaction_date_layout"
+    app:layout_constraintStart_toStartOf="parent">
 
     <com.google.android.material.textfield.TextInputEditText
       android:id="@+id/transaction_amount"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:inputType="numberDecimal"
-      android:layout_margin="@dimen/half_margin"
+      android:inputType="numberDecimal|numberSigned"
       android:hint="@string/amount"
       />
   </com.google.android.material.textfield.TextInputLayout>
@@ -74,16 +73,17 @@
     android:id="@+id/transaction_date_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/half_margin"
+    android:layout_margin="@dimen/full_margin"
     app:hintEnabled="true"
     app:hintAnimationEnabled="true"
-    app:layout_constraintTop_toBottomOf="@id/transaction_amount_layout">
+    app:layout_constraintTop_toBottomOf="@id/transaction_amount_layout"
+    app:layout_constraintBottom_toTopOf="@id/transaction_note_layout"
+    app:layout_constraintStart_toStartOf="parent">
 
     <com.google.android.material.textfield.TextInputEditText
       android:id="@+id/transaction_date"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_margin="@dimen/half_margin"
       android:inputType="date"
       android:hint="@string/transaction_date"
 
@@ -95,25 +95,48 @@
     android:id="@+id/transaction_note_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/half_margin"
+    android:layout_margin="@dimen/full_margin"
     app:hintEnabled="true"
     app:hintAnimationEnabled="true"
-    app:layout_constraintTop_toBottomOf="@id/transaction_date_layout">
+    app:layout_constraintTop_toBottomOf="@id/transaction_date_layout"
+    app:layout_constraintBottom_toTopOf="@id/cancel_button"
+    app:layout_constraintStart_toStartOf="parent">
 
     <com.google.android.material.textfield.TextInputEditText
       android:id="@+id/transaction_note"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_margin="@dimen/half_margin"
       android:inputType="textMultiLine"
       android:minLines="3"
       android:maxLines="6"
       android:hint="@string/transaction_note"
-      app:layout_constraintTop_toBottomOf="@id/transaction_date_layout"
 
       />
   </com.google.android.material.textfield.TextInputLayout>
 
+  <Button
+    android:id="@+id/cancel_button"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/full_margin"
+    android:text="Cancel"
+    app:layout_constraintTop_toBottomOf="@id/transaction_note_layout"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/save_button"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintWidth_percent="0.3"/>
+
+  <Button
+    android:id="@+id/save_button"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/full_margin"
+    android:text="Save"
+    app:layout_constraintTop_toBottomOf="@id/transaction_note_layout"
+    app:layout_constraintStart_toEndOf="@id/cancel_button"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintWidth_percent="0.3"/>
 
 
 

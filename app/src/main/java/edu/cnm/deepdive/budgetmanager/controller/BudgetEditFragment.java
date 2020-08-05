@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import androidx.annotation.NonNull;
@@ -18,7 +17,7 @@ import android.view.ViewGroup;
 import androidx.lifecycle.ViewModelProvider;
 import edu.cnm.deepdive.budgetmanager.R;
 import edu.cnm.deepdive.budgetmanager.model.Budget;
-import edu.cnm.deepdive.budgetmanager.viewModel.MainViewModel;
+import edu.cnm.deepdive.budgetmanager.viewmodel.BudgetViewModel;
 
 /**
  * A simple {@link Fragment} subclass. Use the {@link BudgetEditFragment#newInstance} factory method
@@ -33,7 +32,7 @@ public class BudgetEditFragment extends DialogFragment implements TextWatcher {
   private EditText budgetText;
   private EditText budgetAmount;
   private AlertDialog dialog;
-  private MainViewModel viewModel;
+  private BudgetViewModel viewModel;
   private Budget budget;
 
   public BudgetEditFragment() {
@@ -100,7 +99,7 @@ public class BudgetEditFragment extends DialogFragment implements TextWatcher {
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    viewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
+    viewModel = new ViewModelProvider(getActivity()).get(BudgetViewModel.class);
     viewModel.getBudgets().observe(getViewLifecycleOwner(), (sources) -> {
 //      this.sources = sources;
 //      ArrayAdapter<Source> adapter =

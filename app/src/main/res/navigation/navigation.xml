@@ -53,8 +53,12 @@
     tools:layout="@layout/fragment_create_transaction">
 
     <action
-      android:id="@+id/transaction_to_budget"
+      android:id="@+id/create_transaction_to_budget"
       app:destination="@id/navigation_budget"/>
+
+    <action
+      android:id="@+id/create_transaction_to_home"
+      app:destination="@id/navigation_home"/>
 
   </fragment>
 
