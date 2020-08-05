@@ -36,6 +36,18 @@
   </fragment>
 
   <fragment
+    android:id="@+id/navigation_budget_edit"
+    android:name="edu.cnm.deepdive.budgetmanager.controller.BudgetEditFragment"
+    android:label="Edit Budgets"
+    tools:layout="@layout/fragment_budget_edit">
+
+    <action
+      android:id="@+id/create_budget_to_budget"
+      app:destination="@id/navigation_budget"
+      />
+  </fragment>
+
+  <fragment
     android:id="@+id/navigation_budget"
     android:name="edu.cnm.deepdive.budgetmanager.controller.BudgetFragment"
     android:label="Budgets"
@@ -44,6 +56,10 @@
     <action
       android:id="@+id/budget_to_transaction"
       app:destination="@id/navigation_transaction"/>
+
+    <action
+      android:id="@+id/budget_to_edit_budget"
+      app:destination="@id/navigation_budget_edit"/>
   </fragment>
 
   <fragment

@@ -19,6 +19,9 @@ import androidx.lifecycle.ViewModelProvider;
 import edu.cnm.deepdive.budgetmanager.R;
 import edu.cnm.deepdive.budgetmanager.model.Budget;
 import edu.cnm.deepdive.budgetmanager.viewModel.MainViewModel;
+import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 
 /**
  * A simple {@link Fragment} subclass. Use the {@link BudgetEditFragment#newInstance} factory method
@@ -35,10 +38,11 @@ public class BudgetEditFragment extends DialogFragment implements TextWatcher {
   private AlertDialog dialog;
   private MainViewModel viewModel;
   private Budget budget;
+  private NumberFormat numberFormat;
+  private DateFormat dateFormat;
 
-  public BudgetEditFragment() {
-    // Required empty public constructor
-  }
+  // TODO declare additional fields for all the view objects in the layout. 1 for each widget in fragment_budget.
+
 
   public static BudgetEditFragment newInstance(long budgetId) {
     BudgetEditFragment fragment = new BudgetEditFragment();
@@ -59,10 +63,13 @@ public class BudgetEditFragment extends DialogFragment implements TextWatcher {
   @NonNull
   @Override
   public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+    numberFormat = NumberFormat.getCurrencyInstance();
+    dateFormat = android.text.format.DateFormat.getDateFormat(getContext());
     root = LayoutInflater.from(getContext()).inflate(R.layout.fragment_budget_edit, null, false);
     budgetText = root.findViewById(R.id.budget_text);
-//    budgetAmount = root.findViewById(R.id.budget_amount);
-         budgetText.addTextChangedListener(this);
+    budgetAmount = root.findViewById(R.id.budget_amount_input);
+    // TODO get refrences to other view objects. find view by id to match fields.
+    budgetText.addTextChangedListener(this);
     dialog = new AlertDialog.Builder(getContext())
 //        .setIcon(R.drawable.ic_message)
         .setTitle("Edit Budget")
@@ -73,21 +80,6 @@ public class BudgetEditFragment extends DialogFragment implements TextWatcher {
         .create();
     dialog.setOnShowListener((dlg) -> checkSubmitCondition());
     return dialog;
-  }
-
-  private void save() {
-    budget.setName(budgetText.getText().toString().trim());
-    String amount = budgetAmount.getText().toString().trim();
-//    quote.setSourceId(null);
-//    if (!name.isEmpty()) {
-//      for (Source s : sources) {
-//        if (name.equalsIgnoreCase(s.getName())) {
-//          quote.setSourceId(s.getId());
-//          break;
-//        }
-//      }
-//    }
-    viewModel.save(budget);
   }
 
   @Override
@@ -101,19 +93,14 @@ public class BudgetEditFragment extends DialogFragment implements TextWatcher {
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     viewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
-    viewModel.getBudgets().observe(getViewLifecycleOwner(), (sources) -> {
-//      this.sources = sources;
-//      ArrayAdapter<Source> adapter =
-//          new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, sources);
-//      sourceName.setAdapter(adapter);
-    });
     if (budgetId != 0) {
       viewModel.getBudget().observe(getViewLifecycleOwner(), (budget) -> {
         this.budget = budget;
         if (budget != null) {
           this.budget = budget;
           budgetText.setText(budget.getName());
-          budgetAmount.setText((int) budget.getBudgetedAmount());
+          budgetAmount.setText(numberFormat.format(budget.getBudgetedAmount() / 100D));
+          // TODO set values for rest of the view objects from fields of the budget objects.
         }
       });
       viewModel.setBudgetId(budgetId);
@@ -138,6 +125,19 @@ public class BudgetEditFragment extends DialogFragment implements TextWatcher {
   private void checkSubmitCondition() {
     Button positive = dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE);
     positive.setEnabled(!budgetText.getText().toString().trim().isEmpty());
+    // TODO add logic to disable button with other non nullable values
+  }
+
+  private void save() {
+    try {
+      budget.setName(budgetText.getText().toString().trim());
+      String amount = budgetAmount.getText().toString().trim();
+      budget.setBudgetedAmount((long) (numberFormat.parse(amount).doubleValue() * 100));
+      // TODO do the same thing as above with all the other fields
+      viewModel.save(budget);
+    } catch (ParseException e) {
+      throw new RuntimeException(e);
+    }
   }
 
 }
