@@ -24,15 +24,15 @@ public class BudgetFragment extends Fragment implements BudgetAdapter.OnClickLis
 
   private MainViewModel mainViewModel;
   private RecyclerView budgetList;
-  private FloatingActionButton add;
   private List<Budget> budgets;
+  private FloatingActionButton budgetFab;
 
   public View onCreateView(@NonNull LayoutInflater inflater,
       ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_budget, container, false);
     budgetList = view.findViewById(R.id.budget_list);
-    add = view.findViewById(R.id.add);
-    add.setOnClickListener((v) -> editBudget(0));
+    budgetFab = view.findViewById(R.id.budget_fab);
+    budgetFab.setOnClickListener((v) -> editBudget(0));
     return view;
   }
 

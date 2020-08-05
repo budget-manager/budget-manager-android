@@ -82,6 +82,17 @@
     app:layout_constraintEnd_toEndOf="parent"
     />
 
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/budget_fab"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:foregroundGravity="right|bottom"
+    android:src="@drawable/ic_add"
+    android:layout_margin="@dimen/full_margin"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
+
+  </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
