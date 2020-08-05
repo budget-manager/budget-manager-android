@@ -1,0 +1,271 @@
+Index: app/src/main/java/edu/cnm/deepdive/budgetmanager/viewModel/MainViewModel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package edu.cnm.deepdive.budgetmanager.viewModel;\r\n\r\nimport androidx.lifecycle.LiveData;\r\n\r\npublic class MainViewModel {\r\n\r\n  // TODO setup for MainActivity\r\n//  public LiveData<Throwable> getThrowable() {\r\n//    return throwable;\r\n//  }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/edu/cnm/deepdive/budgetmanager/viewModel/MainViewModel.java	(revision 7d849dbb7464d039717a585cc0ea4acb9c322e61)
++++ app/src/main/java/edu/cnm/deepdive/budgetmanager/viewModel/MainViewModel.java	(date 1596488565430)
+@@ -1,8 +1,45 @@
+ package edu.cnm.deepdive.budgetmanager.viewModel;
+ 
++import android.app.Application;
++import androidx.annotation.NonNull;
++import androidx.lifecycle.AndroidViewModel;
+ import androidx.lifecycle.LiveData;
++import androidx.lifecycle.MutableLiveData;
++import edu.cnm.deepdive.budgetmanager.model.Budget;
++import edu.cnm.deepdive.budgetmanager.service.BudgetRepository;
++import io.reactivex.Single;
++import io.reactivex.disposables.CompositeDisposable;
++import java.sql.SQLTransactionRollbackException;
++import java.util.List;
++
++public class MainViewModel extends AndroidViewModel {
+ 
+-public class MainViewModel {
++  private final BudgetRepository budgetRepository;
++//  private final TransactionRepository transactionRepository;
++  private final MutableLiveData<Throwable> throwable;
++  private final CompositeDisposable pending;
++  private final MutableLiveData<BudgetWithBudgetAmount> budget;
++
++  public MainViewModel(@NonNull Application application) {
++    super(application);
++    budgetRepository = new BudgetRepository(application);
++//    transactionRepository = new TransactionRepository(application);
++    budget = new MutableLiveData<>();
++    throwable = new MutableLiveData<>();
++    pending = new CompositeDisposable();
++  }
++
++//  public LiveData<BudgetWithBudgetAmount> getBudget() {
++//    return budgetRepository.getAll();
++//  }
++
++  public LiveData<Budget> getBudget() {
++    return budget;
++  }
++
++  public LiveData<List<Budget>> getBudgets() {
++    return getBudgets();
++  }
+ 
+   // TODO setup for MainActivity
+ //  public LiveData<Throwable> getThrowable() {
+Index: app/src/main/java/edu/cnm/deepdive/budgetmanager/controller/BudgetFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package edu.cnm.deepdive.budgetmanager.controller;\r\n\r\nimport android.os.Bundle;\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport androidx.lifecycle.ViewModelProvider;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\nimport com.google.android.material.floatingactionbutton.FloatingActionButton;\r\nimport edu.cnm.deepdive.budgetmanager.model.Budget;\r\nimport edu.cnm.deepdive.budgetmanager.R;\r\nimport edu.cnm.deepdive.budgetmanager.view.BudgetAdapter;\r\nimport edu.cnm.deepdive.budgetmanager.viewModel.MainViewModel;\r\nimport java.util.List;\r\n\r\n\r\n/**\r\n * A simple {@link Fragment} subclass.\r\n */\r\npublic class BudgetFragment extends Fragment implements BudgetAdapter.OnClickListener {\r\n\r\n  private MainViewModel mainViewModel;\r\n  private RecyclerView budgetList;\r\n  private FloatingActionButton add;\r\n  private List<Budget> budgets;\r\n\r\n  public View onCreateView(@NonNull LayoutInflater inflater,\r\n      ViewGroup container, Bundle savedInstanceState) {\r\n    View view = inflater.inflate(R.layout.fragment_budget, container, false);\r\n    budgetList = view.findViewById(R.id.budget_list);\r\n    add = view.findViewById(R.id.add);\r\n    add.setOnClickListener((v) -> editBudget(0));\r\n    return view;\r\n  }\r\n\r\n  @Override\r\n  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {\r\n    super.onViewCreated(view, savedInstanceState);\r\n    mainViewModel = new ViewModelProvider(getActivity())\r\n        .get(MainViewModel.class);\r\n    mainViewModel.getBudgets().observe(getViewLifecycleOwner(), (budgets) -> {\r\n      BudgetAdapter adapter =\r\n          new BudgetAdapter(getContext(), budgets, this);\r\n      budgetList.setAdapter(adapter);\r\n    });\r\n  }\r\n\r\n//  @Override\r\n//  public void onClick(View view, int position, Budget budget) {\r\n//    editBudget(budget.getId());\r\n//  }\r\n\r\n\r\n//  private void editBudget(long budgetId) {\r\n//    BudgetEditFragment fragment = BudgetEditFragment.newInstance(budgetId);\r\n//    fragment.show(getChildFragmentManager(), fragment.getClass().getName());\r\n//  }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/edu/cnm/deepdive/budgetmanager/controller/BudgetFragment.java	(revision 7d849dbb7464d039717a585cc0ea4acb9c322e61)
++++ app/src/main/java/edu/cnm/deepdive/budgetmanager/controller/BudgetFragment.java	(date 1596484210159)
+@@ -20,7 +20,7 @@
+ /**
+  * A simple {@link Fragment} subclass.
+  */
+-public class BudgetFragment extends Fragment implements BudgetAdapter.OnClickListener {
++public class BudgetFragment extends Fragment {
+ 
+   private MainViewModel mainViewModel;
+   private RecyclerView budgetList;
+@@ -48,15 +48,14 @@
+     });
+   }
+ 
+-//  @Override
+-//  public void onClick(View view, int position, Budget budget) {
+-//    editBudget(budget.getId());
+-//  }
++  public void onClick(View view, int position, Budget budget) {
++    editBudget(budget.getId());
++  }
+ 
+ 
+-//  private void editBudget(long budgetId) {
+-//    BudgetEditFragment fragment = BudgetEditFragment.newInstance(budgetId);
+-//    fragment.show(getChildFragmentManager(), fragment.getClass().getName());
+-//  }
++  private void editBudget(long budgetId) {
++    BudgetEditFragment fragment = BudgetEditFragment.newInstance(budgetId);
++    fragment.show(getChildFragmentManager(), fragment.getClass().getName());
++  }
+ 
+ }
+Index: app/src/main/java/edu/cnm/deepdive/budgetmanager/controller/BudgetEditFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/edu/cnm/deepdive/budgetmanager/controller/BudgetEditFragment.java	(date 1596487979329)
++++ app/src/main/java/edu/cnm/deepdive/budgetmanager/controller/BudgetEditFragment.java	(date 1596487979329)
+@@ -0,0 +1,142 @@
++package edu.cnm.deepdive.budgetmanager.controller;
++
++import android.app.AlertDialog;
++import android.app.Dialog;
++import android.os.Bundle;
++import android.text.Editable;
++import android.widget.ArrayAdapter;
++import android.widget.Button;
++import android.widget.EditText;
++import androidx.annotation.NonNull;
++import androidx.annotation.Nullable;
++import androidx.fragment.app.DialogFragment;
++import androidx.fragment.app.Fragment;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import androidx.lifecycle.ViewModelProvider;
++import edu.cnm.deepdive.budgetmanager.R;
++import edu.cnm.deepdive.budgetmanager.model.Budget;
++import edu.cnm.deepdive.budgetmanager.viewModel.MainViewModel;
++
++/**
++ * A simple {@link Fragment} subclass. Use the {@link BudgetEditFragment#newInstance} factory method
++ * to create an instance of this fragment.
++ */
++public class BudgetEditFragment extends DialogFragment {
++
++  private static final String ID_KEY = "budget_id";
++
++  private long budgetId;
++  private View root;
++  private EditText budgetText;
++  private EditText budgetAmount;
++  private AlertDialog dialog;
++  private MainViewModel viewModel;
++  private Budget budget;
++
++  public BudgetEditFragment() {
++    // Required empty public constructor
++  }
++
++  public static BudgetEditFragment newInstance(long budgetId) {
++    BudgetEditFragment fragment = new BudgetEditFragment();
++    Bundle args = new Bundle();
++    args.putLong(ID_KEY, budgetId);
++    fragment.setArguments(args);
++    return fragment;
++  }
++
++  @Override
++  public void onCreate(Bundle savedInstanceState) {
++    super.onCreate(savedInstanceState);
++    if (getArguments() != null) {
++      budgetId = getArguments().getLong(ID_KEY);
++    }
++  }
++
++  @NonNull
++  @Override
++  public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
++    root = LayoutInflater.from(getContext()).inflate(R.layout.fragment_budget_edit, null, false);
++    budgetText = root.findViewById(R.id.budget_text);
++    budgetAmount = root.findViewById(R.id.budget_amount);
++         budgetText.addTextChangedListener(this);
++    dialog = new AlertDialog.Builder(getContext())
++//        .setIcon(R.drawable.ic_message)
++        .setTitle("Edit Budget")
++        .setView(root)
++        .setPositiveButton(android.R.string.ok, (dlg, which) -> save())
++        .setNegativeButton(android.R.string.cancel, (dlg, which) -> {
++        })
++        .create();
++    dialog.setOnShowListener((dlg) -> checkSubmitCondition());
++    return dialog;
++  }
++
++  private void save() {
++    budget.setName(budgetText.getText().toString().trim());
++    String amount = budgetAmount.getText().toString().trim();
++//    quote.setSourceId(null);
++//    if (!name.isEmpty()) {
++//      for (Source s : sources) {
++//        if (name.equalsIgnoreCase(s.getName())) {
++//          quote.setSourceId(s.getId());
++//          break;
++//        }
++//      }
++//    }
++    viewModel.saveBudget(budget);
++  }
++
++  @Override
++  public View onCreateView(LayoutInflater inflater, ViewGroup container,
++      Bundle savedInstanceState) {
++    return root;
++  }
++
++  @SuppressWarnings("ConstantConditions")
++  @Override
++  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
++    super.onViewCreated(view, savedInstanceState);
++    viewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
++    viewModel.getBudgets().observe(getViewLifecycleOwner(), (sources) -> {
++//      this.sources = sources;
++//      ArrayAdapter<Source> adapter =
++//          new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, sources);
++//      sourceName.setAdapter(adapter);
++    });
++    if (budgetId != 0) {
++      viewModel.getBudget().observe(getViewLifecycleOwner(), (budget) -> {
++        this.budget = budget;
++        if (budget != null) {
++          budgetText.setText(budget.getName());
++          budgetAmount.setText(budget.getBudgetedAmount());
++//              != null) ? quote.getSource().getName() : "");
++        }
++      });
++      viewModel.setBudgetId(budgetId);
++    } else {
++      budget = new Budget();
++    }
++  }
++
++  @Override
++  public void beforeTextChanged(CharSequence s, int start, int count, int after) {
++  }
++
++  @Override
++  public void onTextChanged(CharSequence s, int start, int before, int count) {
++  }
++
++  @Override
++  public void afterTextChanged(Editable s) {
++    checkSubmitCondition();
++  }
++
++  private void checkSubmitCondition() {
++    Button positive = dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE);
++    positive.setEnabled(!budgetText.getText().toString().trim().isEmpty());
++  }
++
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_budget_edit.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_budget_edit.xml	(date 1596484176857)
++++ app/src/main/res/layout/fragment_budget_edit.xml	(date 1596484176857)
+@@ -0,0 +1,14 @@
++<?xml version="1.0" encoding="utf-8"?>
++<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
++  xmlns:tools="http://schemas.android.com/tools"
++  android:layout_width="match_parent"
++  android:layout_height="match_parent"
++  tools:context=".controller.BudgetEditFragment">
++
++  <!-- TODO: Update blank fragment layout -->
++  <TextView
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:text="@string/hello_blank_fragment"/>
++
++</FrameLayout>
+\ No newline at end of file
