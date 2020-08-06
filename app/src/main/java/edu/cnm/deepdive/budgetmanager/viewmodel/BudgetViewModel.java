@@ -99,7 +99,7 @@ public class BudgetViewModel extends AndroidViewModel {
   }
 
   private void refreshAndExecute(AuthenticatedTask task) {
-    throwable.setValue(null);
+    throwable.postValue(null);
     signInService.refresh()
         .addOnSuccessListener((account) -> pending.add(task.execute(account)))
         .addOnFailureListener(throwable::postValue);
