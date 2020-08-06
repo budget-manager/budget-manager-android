@@ -2,6 +2,7 @@ package edu.cnm.deepdive.budgetmanager.controller;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,8 +23,13 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
     signInService = GoogleSignInService.getInstance();
+    MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+    viewModel.getThrowable().observe(this, (throwable) -> {
+      if (throwable != null) {
+        Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_LONG).show();
+      }
+    });
     setUpNavigation();
   }
 

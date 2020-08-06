@@ -10,14 +10,14 @@ import edu.cnm.deepdive.budgetmanager.model.Budget;
 import edu.cnm.deepdive.budgetmanager.service.BudgetRepository;
 import edu.cnm.deepdive.budgetmanager.service.GoogleSignInService;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BudgetViewModel extends AndroidViewModel {
+public class MainViewModel extends AndroidViewModel {
 
   private final BudgetRepository budgetRepository;
+//  private final TransactionRepository transactionRepository;
   private final MutableLiveData<Throwable> throwable;
   private final CompositeDisposable pending;
   private final MutableLiveData<Budget> budget;
@@ -26,25 +26,26 @@ public class BudgetViewModel extends AndroidViewModel {
   private final GoogleSignInService signInService;
 
 
-  public BudgetViewModel(@NonNull Application application) {
+  public MainViewModel(@NonNull Application application) {
     super(application);
     budgetRepository = new BudgetRepository(application);
+//    transactionRepository = new TransactionRepository(application);
     budget = new MutableLiveData<>();
     budgets = new MutableLiveData<>();
     throwable = new MutableLiveData<>();
     pending = new CompositeDisposable();
     budgetMap = new HashMap<>();
     signInService = GoogleSignInService.getInstance();
+    refreshBudgets();
   }
 
-  public MutableLiveData<Budget> getBudget() {
+  public LiveData<Budget> getBudget() {
     return budget;
   }
 
-  public MutableLiveData<List<Budget>> getBudgets() {
+  public LiveData<List<Budget>> getBudgets() {
     return budgets;
   }
-
 
   public LiveData<Throwable> getThrowable() {
     return throwable;

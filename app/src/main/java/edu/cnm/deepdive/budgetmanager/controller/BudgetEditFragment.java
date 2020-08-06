@@ -2,6 +2,8 @@ package edu.cnm.deepdive.budgetmanager.controller;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnShowListener;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,28 +18,44 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.lifecycle.ViewModelProvider;
 import edu.cnm.deepdive.budgetmanager.R;
+import edu.cnm.deepdive.budgetmanager.controller.DateTimePickerFragment.Mode;
+import edu.cnm.deepdive.budgetmanager.controller.DateTimePickerFragment.OnChangeListener;
 import edu.cnm.deepdive.budgetmanager.model.Budget;
-import edu.cnm.deepdive.budgetmanager.viewmodel.BudgetViewModel;
+import edu.cnm.deepdive.budgetmanager.viewModel.MainViewModel;
+import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass. Use the {@link BudgetEditFragment#newInstance} factory method
  * to create an instance of this fragment.
  */
-public class BudgetEditFragment extends DialogFragment implements TextWatcher {
+public class BudgetEditFragment extends DialogFragment implements TextWatcher, OnChangeListener,
+    OnShowListener {
 
   private static final String ID_KEY = "budget_id";
 
   private long budgetId;
   private View root;
-  private EditText budgetText;
-  private EditText budgetAmount;
   private AlertDialog dialog;
-  private BudgetViewModel viewModel;
+  private MainViewModel viewModel;
   private Budget budget;
-
-  public BudgetEditFragment() {
-    // Required empty public constructor
-  }
+  private NumberFormat numberFormat;
+  private DateTimeFormatter dateFormat;
+  private EditText name;
+  private EditText total;
+  private EditText startDate;
+  private EditText endDate;
+  private EditText currentEditDate;
+  private EditText note;
+  private Calendar start;
+  private Calendar end;
 
   public static BudgetEditFragment newInstance(long budgetId) {
     BudgetEditFragment fragment = new BudgetEditFragment();
@@ -58,10 +76,22 @@ public class BudgetEditFragment extends DialogFragment implements TextWatcher {
   @NonNull
   @Override
   public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+    numberFormat = NumberFormat.getNumberInstance();
+    numberFormat.setMinimumFractionDigits(2);
+    numberFormat.setMaximumFractionDigits(2);
+    dateFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
     root = LayoutInflater.from(getContext()).inflate(R.layout.fragment_budget_edit, null, false);
-    budgetText = root.findViewById(R.id.budget_text);
-//    budgetAmount = root.findViewById(R.id.budget_amount);
-         budgetText.addTextChangedListener(this);
+    name = root.findViewById(R.id.budget_name_input);
+    total = root.findViewById(R.id.budget_amount_input);
+    start = Calendar.getInstance();
+    startDate = root.findViewById(R.id.start_date_input);
+    startDate.setTag(start);
+    startDate.setOnClickListener((v) -> showDatePicker(startDate));
+    end = Calendar.getInstance();
+    endDate = root.findViewById(R.id.end_date_input);
+    endDate.setTag(end);
+    endDate.setOnClickListener((v) -> showDatePicker(endDate));
+    note = root.findViewById(R.id.budget_note_input);
     dialog = new AlertDialog.Builder(getContext())
 //        .setIcon(R.drawable.ic_message)
         .setTitle("Edit Budget")
@@ -70,23 +100,8 @@ public class BudgetEditFragment extends DialogFragment implements TextWatcher {
         .setNegativeButton(android.R.string.cancel, (dlg, which) -> {
         })
         .create();
-    dialog.setOnShowListener((dlg) -> checkSubmitCondition());
+    dialog.setOnShowListener(this);
     return dialog;
-  }
-
-  private void save() {
-    budget.setName(budgetText.getText().toString().trim());
-    String amount = budgetAmount.getText().toString().trim();
-//    quote.setSourceId(null);
-//    if (!name.isEmpty()) {
-//      for (Source s : sources) {
-//        if (name.equalsIgnoreCase(s.getName())) {
-//          quote.setSourceId(s.getId());
-//          break;
-//        }
-//      }
-//    }
-    viewModel.save(budget);
   }
 
   @Override
@@ -99,25 +114,29 @@ public class BudgetEditFragment extends DialogFragment implements TextWatcher {
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    viewModel = new ViewModelProvider(getActivity()).get(BudgetViewModel.class);
-    viewModel.getBudgets().observe(getViewLifecycleOwner(), (sources) -> {
-//      this.sources = sources;
-//      ArrayAdapter<Source> adapter =
-//          new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, sources);
-//      sourceName.setAdapter(adapter);
-    });
+    viewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
     if (budgetId != 0) {
       viewModel.getBudget().observe(getViewLifecycleOwner(), (budget) -> {
-        this.budget = budget;
         if (budget != null) {
           this.budget = budget;
-          budgetText.setText(budget.getName());
-          budgetAmount.setText((int) budget.getBudgetedAmount());
+          name.setText(budget.getName());
+          total.setText(numberFormat.format(budget.getBudgetedAmount() / 100D));
+          start.set(Calendar.YEAR, budget.getStartDate().getYear());
+          start.set(Calendar.MONTH, budget.getStartDate().getMonthValue() - 1);
+          start.set(Calendar.DAY_OF_MONTH, budget.getStartDate().getDayOfMonth());
+          startDate.setText(dateFormat.format(budget.getStartDate()));
+          end.set(Calendar.YEAR, budget.getEndDate().getYear());
+          end.set(Calendar.MONTH, budget.getEndDate().getMonthValue() - 1);
+          end.set(Calendar.DAY_OF_MONTH, budget.getEndDate().getDayOfMonth());
+          endDate.setText(dateFormat.format(budget.getEndDate()));
+          note.setText(budget.getNote());
         }
       });
       viewModel.setBudgetId(budgetId);
     } else {
       budget = new Budget();
+      startDate.setText(dateFormat.format(LocalDate.now()));
+      endDate.setText(dateFormat.format(LocalDate.now()));
     }
   }
 
@@ -136,7 +155,55 @@ public class BudgetEditFragment extends DialogFragment implements TextWatcher {
 
   private void checkSubmitCondition() {
     Button positive = dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE);
-    positive.setEnabled(!budgetText.getText().toString().trim().isEmpty());
+    positive.setEnabled(
+        !name.getText().toString().trim().isEmpty()
+            && !total.getText().toString().trim().isEmpty()
+            && !startDate.getText().toString().trim().isEmpty()
+            && !endDate.getText().toString().trim().isEmpty()
+            && !note.getText().toString().trim().isEmpty()
+    );
   }
 
+  private void save() {
+    try {
+      budget.setName(name.getText().toString().trim());
+      String amount = total.getText().toString().trim();
+      budget.setBudgetedAmount((long) (numberFormat.parse(amount).doubleValue() * 100));
+      budget.setStartDate(LocalDateTime.ofInstant(start.toInstant(),
+          start.getTimeZone().toZoneId()).toLocalDate());
+      budget.setEndDate(LocalDateTime.ofInstant(end.toInstant(),
+          end.getTimeZone().toZoneId()).toLocalDate());
+      budget.setNote(note.getText().toString().trim());
+      viewModel.save(budget);
+    } catch (ParseException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  private void showDatePicker(EditText field) {
+    currentEditDate = field;
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTime(((Calendar) field.getTag()).getTime());
+    DateTimePickerFragment fragment = DateTimePickerFragment.createInstance(Mode.DATE, calendar);
+    fragment.show(getChildFragmentManager(), fragment.getClass().getName());
+  }
+
+  @Override
+  public void onChange(Calendar calendar) {
+    LocalDate date = LocalDate.of(calendar.get(Calendar.YEAR),
+        calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH));
+    currentEditDate.setText(dateFormat.format(date));
+    Calendar target = (Calendar) currentEditDate.getTag();
+    target.setTime(calendar.getTime());
+  }
+
+  @Override
+  public void onShow(DialogInterface dialog) {
+    name.addTextChangedListener(this);
+    total.addTextChangedListener(this);
+    startDate.addTextChangedListener(this);
+    endDate.addTextChangedListener(this);
+    note.addTextChangedListener(this);
+    checkSubmitCondition();
+  }
 }

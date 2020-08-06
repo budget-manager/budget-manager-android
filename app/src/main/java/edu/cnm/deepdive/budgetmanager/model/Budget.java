@@ -1,7 +1,7 @@
 package edu.cnm.deepdive.budgetmanager.model;
 
 import com.google.gson.annotations.Expose;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,10 +23,13 @@ public class Budget implements Content {
     private long budgetedAmount;
 
     @Expose
-    private Date startDate;
+    private LocalDate startDate;
 
     @Expose
-    private Date endDate;
+    private LocalDate endDate;
+
+    @Expose
+    private String note;
 
     @Expose
     private double thresholdPercent;
@@ -64,23 +67,31 @@ public class Budget implements Content {
       this.budgetedAmount = budgetedAmount;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
       return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
       this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
       return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
       this.endDate = endDate;
     }
 
-    public double getThresholdPercent() {
+  public String getNote() {
+    return note;
+  }
+
+  public void setNote(String note) {
+    this.note = note;
+  }
+
+  public double getThresholdPercent() {
       return thresholdPercent;
     }
 
@@ -96,9 +107,4 @@ public class Budget implements Content {
       this.recurring = recurring;
     }
 
-//    public boolean isEditableBy(User user) {
-//      return user != null
-//          && contributor != null
-//          && user.getId().equals(contributor.getId());
-//    }
 }

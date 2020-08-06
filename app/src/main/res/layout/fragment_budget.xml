@@ -5,17 +5,18 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  tools:context=".controller.BudgetFragment">
+  tools:context=".controller.BudgetFragment"
+  android:background="@color/gray">
 
   <TextView
     android:id="@+id/threshold_percent_tracked"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:text="Personal Allowance 50% of total"
+    android:padding="@dimen/full_margin"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintEnd_toStartOf="@id/long_term_goal"
-    app:layout_constraintBottom_toTopOf="@id/monthly_budget"
     />
 
   <TextView
@@ -23,10 +24,10 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Savings 35% of Goal"
+    android:padding="@dimen/full_margin"
     app:layout_constraintStart_toEndOf="@id/threshold_percent_tracked"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toTopOf="@id/monthly_budget"
     />
 
   <TextView
@@ -34,6 +35,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Monthly Budget"
+    android:padding="@dimen/full_margin"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/threshold_percent_tracked"
     app:layout_constraintEnd_toEndOf="parent"
@@ -41,10 +43,22 @@
     />
 
   <TextView
+    android:id="@+id/monthly_budget_current_vs_total"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintStart_toEndOf="@id/monthly_budget"
+    app:layout_constraintTop_toBottomOf="@id/long_term_goal"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/budget_category"
+    />
+
+
+  <TextView
     android:id="@+id/budget_category"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Gas"
+    android:text="Name of Budget"
+    android:padding="@dimen/full_margin"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/monthly_budget"
     app:layout_constraintEnd_toStartOf="@id/budget_current_total"
@@ -54,7 +68,8 @@
     android:id="@+id/budget_current_total"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="30/60"
+    android:text="10/20"
+    android:padding="@dimen/full_margin"
     app:layout_constraintStart_toEndOf="@id/budget_category"
     app:layout_constraintTop_toBottomOf="@id/monthly_budget"
     app:layout_constraintEnd_toStartOf="@id/threshold_percent_showable"
@@ -65,30 +80,32 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="50%"
+    android:padding="@dimen/full_margin"
     app:layout_constraintStart_toEndOf="@id/budget_current_total"
     app:layout_constraintTop_toBottomOf="@id/monthly_budget"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintBottom_toTopOf="@id/budget_list"/>
 
   <androidx.recyclerview.widget.RecyclerView
-    android:id="@id/budget_list"
-    android:layout_width="@dimen/fill_space"
-    android:layout_height="@dimen/fill_space"
-    android:layout_margin="@dimen/half_margin"
+    android:id="@+id/budget_list"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     android:orientation="vertical"
+    android:background="#FFE0E0E0"
+    android:padding="@dimen/half_margin"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/budget_category"
     app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
     />
 
   <com.google.android.material.floatingactionbutton.FloatingActionButton
     android:id="@+id/budget_fab"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:foregroundGravity="right|bottom"
     android:src="@drawable/ic_add"
-    android:layout_margin="@dimen/full_margin"
+    app:useCompatPadding="true"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent">
 

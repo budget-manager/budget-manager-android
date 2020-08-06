@@ -5,8 +5,10 @@ import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.budgetmanager.BuildConfig;
 import edu.cnm.deepdive.budgetmanager.model.Budget;
 import edu.cnm.deepdive.budgetmanager.model.Transaction;
+import edu.cnm.deepdive.budgetmanager.view.LocalDateSerializer;
 import io.reactivex.Completable;
 import io.reactivex.Single;
+import java.time.LocalDate;
 import java.util.List;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -69,6 +71,7 @@ public interface BudgetManagerCloudService {
     static {
       Gson gson = new GsonBuilder()
           .excludeFieldsWithoutExposeAnnotation()
+          .registerTypeAdapter(LocalDate.class, new LocalDateSerializer())
           .create();
       HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
       interceptor.setLevel(BuildConfig.DEBUG ? Level.BODY : Level.NONE);

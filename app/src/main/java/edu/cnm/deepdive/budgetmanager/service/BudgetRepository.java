@@ -35,7 +35,7 @@ public class BudgetRepository {
   }
 
   public Single<Budget> save(String idToken, Budget budget) {
-    Single<Budget> task = (budget.getId()==0)
+    Single<Budget> task = (budget.getId() == null)
         ? cloudService.postBudget(getHeader(idToken), budget)
         : cloudService.putBudget(getHeader(idToken), budget.getId(), budget);
     return task
