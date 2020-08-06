@@ -10,11 +10,12 @@ import edu.cnm.deepdive.budgetmanager.model.Budget;
 import edu.cnm.deepdive.budgetmanager.service.BudgetRepository;
 import edu.cnm.deepdive.budgetmanager.service.GoogleSignInService;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainViewModel extends AndroidViewModel {
+public class BudgetViewModel extends AndroidViewModel {
 
   private final BudgetRepository budgetRepository;
 //  private final TransactionRepository transactionRepository;
@@ -26,7 +27,7 @@ public class MainViewModel extends AndroidViewModel {
   private final GoogleSignInService signInService;
 
 
-  public MainViewModel(@NonNull Application application) {
+  public BudgetViewModel(@NonNull Application application) {
     super(application);
     budgetRepository = new BudgetRepository(application);
 //    transactionRepository = new TransactionRepository(application);

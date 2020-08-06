@@ -7,28 +7,27 @@ import android.content.DialogInterface.OnShowListener;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import edu.cnm.deepdive.budgetmanager.R;
 import edu.cnm.deepdive.budgetmanager.controller.DateTimePickerFragment.Mode;
 import edu.cnm.deepdive.budgetmanager.controller.DateTimePickerFragment.OnChangeListener;
 import edu.cnm.deepdive.budgetmanager.model.Budget;
-import edu.cnm.deepdive.budgetmanager.viewModel.MainViewModel;
-import java.text.DateFormat;
+import edu.cnm.deepdive.budgetmanager.viewmodel.BudgetViewModel;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 import java.util.Calendar;
 
@@ -44,7 +43,7 @@ public class BudgetEditFragment extends DialogFragment implements TextWatcher, O
   private long budgetId;
   private View root;
   private AlertDialog dialog;
-  private MainViewModel viewModel;
+  private BudgetViewModel viewModel;
   private Budget budget;
   private NumberFormat numberFormat;
   private DateTimeFormatter dateFormat;
@@ -114,7 +113,7 @@ public class BudgetEditFragment extends DialogFragment implements TextWatcher, O
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    viewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
+    viewModel = new ViewModelProvider(getActivity()).get(BudgetViewModel.class);
     if (budgetId != 0) {
       viewModel.getBudget().observe(getViewLifecycleOwner(), (budget) -> {
         if (budget != null) {

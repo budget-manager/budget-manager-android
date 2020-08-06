@@ -13,7 +13,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import edu.cnm.deepdive.budgetmanager.model.Budget;
 import edu.cnm.deepdive.budgetmanager.R;
 import edu.cnm.deepdive.budgetmanager.view.BudgetAdapter;
-import edu.cnm.deepdive.budgetmanager.viewModel.MainViewModel;
+import edu.cnm.deepdive.budgetmanager.viewmodel.BudgetViewModel;
 import java.util.List;
 
 
@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class BudgetFragment extends Fragment implements BudgetAdapter.OnClickListener {
 
-  private MainViewModel mainViewModel;
+  private BudgetViewModel mainViewModel;
   private RecyclerView budgetList;
   private FloatingActionButton add;
   private List<Budget> budgets;
@@ -40,7 +40,7 @@ public class BudgetFragment extends Fragment implements BudgetAdapter.OnClickLis
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     mainViewModel = new ViewModelProvider(getActivity())
-        .get(MainViewModel.class);
+        .get(BudgetViewModel.class);
     mainViewModel.getBudgets().observe(getViewLifecycleOwner(), (budgets) -> {
       BudgetAdapter adapter =
           new BudgetAdapter(getContext(), budgets, this);
@@ -48,10 +48,10 @@ public class BudgetFragment extends Fragment implements BudgetAdapter.OnClickLis
     });
   }
 
-//  @Override
-//  public void onClick(View view, int position, Budget budget) {
-//    editBudget(budget.getId());
-//  }
+  @Override
+  public void onClick(View view, int position, Budget budget) {
+    editBudget(budget.getId());
+  }
 
 
   private void editBudget(long budgetId) {

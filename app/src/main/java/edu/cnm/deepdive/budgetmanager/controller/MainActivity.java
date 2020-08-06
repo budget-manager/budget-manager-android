@@ -6,6 +6,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
@@ -13,6 +14,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import edu.cnm.deepdive.budgetmanager.R;
 import edu.cnm.deepdive.budgetmanager.service.GoogleSignInService;
+import edu.cnm.deepdive.budgetmanager.viewmodel.BudgetViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     signInService = GoogleSignInService.getInstance();
-    MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+    BudgetViewModel viewModel = new ViewModelProvider(this).get(BudgetViewModel.class);
     viewModel.getThrowable().observe(this, (throwable) -> {
       if (throwable != null) {
         Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_LONG).show();
