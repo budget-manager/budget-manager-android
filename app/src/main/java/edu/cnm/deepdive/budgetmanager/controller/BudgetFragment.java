@@ -13,7 +13,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import edu.cnm.deepdive.budgetmanager.model.Budget;
 import edu.cnm.deepdive.budgetmanager.R;
 import edu.cnm.deepdive.budgetmanager.view.BudgetAdapter;
-import edu.cnm.deepdive.budgetmanager.viewmodel.BudgetViewModel;
+import edu.cnm.deepdive.budgetmanager.viewModel.MainViewModel;
 import java.util.List;
 
 
@@ -22,35 +22,36 @@ import java.util.List;
  */
 public class BudgetFragment extends Fragment implements BudgetAdapter.OnClickListener {
 
-  private BudgetViewModel budgetViewModel;
+  private MainViewModel mainViewModel;
   private RecyclerView budgetList;
+  private FloatingActionButton add;
   private List<Budget> budgets;
-  private FloatingActionButton budgetFab;
 
   public View onCreateView(@NonNull LayoutInflater inflater,
       ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_budget, container, false);
     budgetList = view.findViewById(R.id.budget_list);
-    budgetFab = view.findViewById(R.id.budget_fab);
-    budgetFab.setOnClickListener((v) -> editBudget(0));
+    add = view.findViewById(R.id.add);
+    add.setOnClickListener((v) -> editBudget(0));
     return view;
   }
 
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    budgetViewModel = new ViewModelProvider(getActivity())
-        .get(BudgetViewModel.class);
-    budgetViewModel.getBudgets().observe(getViewLifecycleOwner(), (budgets) -> {
+    mainViewModel = new ViewModelProvider(getActivity())
+        .get(MainViewModel.class);
+    mainViewModel.getBudgets().observe(getViewLifecycleOwner(), (budgets) -> {
       BudgetAdapter adapter =
           new BudgetAdapter(getContext(), budgets, this);
       budgetList.setAdapter(adapter);
     });
   }
 
-  public void onClick(View view, int position, Budget budget) {
-    editBudget(budget.getId());
-  }
+//  @Override
+//  public void onClick(View view, int position, Budget budget) {
+//    editBudget(budget.getId());
+//  }
 
 
   private void editBudget(long budgetId) {
