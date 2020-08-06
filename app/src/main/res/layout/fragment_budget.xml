@@ -97,6 +97,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/budget_category"
     app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
     />
 
   <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -107,8 +108,6 @@
     app:useCompatPadding="true"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent">
-
-    TODO fix this button so it points at fragment_budget_edit
 
   </com.google.android.material.floatingactionbutton.FloatingActionButton>
 

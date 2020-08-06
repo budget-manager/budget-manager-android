@@ -12,6 +12,8 @@ import edu.cnm.deepdive.budgetmanager.R;
 import edu.cnm.deepdive.budgetmanager.model.Budget;
 import edu.cnm.deepdive.budgetmanager.view.BudgetAdapter.Holder;
 import java.text.NumberFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.List;
 
 public class BudgetAdapter extends RecyclerView.Adapter<Holder> {
@@ -20,12 +22,14 @@ public class BudgetAdapter extends RecyclerView.Adapter<Holder> {
   private final List<Budget> budgets;
   private final OnClickListener clickListener;
   private final NumberFormat numberFormat;
+  private final DateTimeFormatter dateFormatter;
 
   public BudgetAdapter(Context context, List<Budget> budgets, OnClickListener clickListener) {
     this.context = context;
     this.budgets = budgets;
     this.clickListener = clickListener;
-    numberFormat = NumberFormat.getInstance();
+    numberFormat = NumberFormat.getCurrencyInstance();
+    dateFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
   }
 
   @Override
@@ -46,21 +50,27 @@ public class BudgetAdapter extends RecyclerView.Adapter<Holder> {
 
   class Holder extends RecyclerView.ViewHolder {
 
-    private final View itemView;
-    private final TextView budgetCategory;
-    private final TextView thresholdPercent;
+    private final TextView name;
+    private final TextView budgetedAmount;
+    private final TextView startDate;
+    private final TextView endDate;
+
 
     public Holder(View itemView) {
       super(itemView);
-      this.itemView = itemView;
-      thresholdPercent = itemView.findViewById(R.id.threshold_percent_showable);
-      budgetCategory = itemView.findViewById(R.id.budget_list);
+      name = itemView.findViewById(R.id.name);
+      budgetedAmount = itemView.findViewById(R.id.budgeted_amount);
+      startDate = itemView.findViewById(R.id.start_date);
+      endDate = itemView.findViewById(R.id.end_date);
+
     }
 
     private void bind(int position) {
       Budget item = budgets.get(position);
-      budgetCategory.setText(item.getName());
-      thresholdPercent.setText(numberFormat.format(item.getThresholdPercent()));
+      name.setText(item.getName());
+      budgetedAmount.setText(numberFormat.format(item.getBudgetedAmount() / 100D));
+      startDate.setText(dateFormatter.format(item.getStartDate()));
+      endDate.setText(dateFormatter.format(item.getEndDate()));
       itemView.setOnClickListener((v) -> clickListener.onClick(v, getAdapterPosition(), item));
     }
 

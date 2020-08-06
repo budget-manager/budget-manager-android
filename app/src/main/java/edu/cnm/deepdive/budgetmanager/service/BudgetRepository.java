@@ -35,16 +35,16 @@ public class BudgetRepository {
   }
 
   public Single<Budget> save(String idToken, Budget budget) {
-    Single<Budget> task = (budget.getBudgetId()==0)
+    Single<Budget> task = (budget.getId() == null)
         ? cloudService.postBudget(getHeader(idToken), budget)
-        : cloudService.putBudget(getHeader(idToken), budget.getBudgetId(), budget);
+        : cloudService.putBudget(getHeader(idToken), budget.getId(), budget);
     return task
         .subscribeOn(Schedulers.from(networkPool));
   }
 
   public Completable remove(String token, Budget budget) {
-    if (budget.getBudgetId() != null) {
-      return cloudService.deleteBudget(String.format(AUTH_HEADER_FORMAT, token), budget.getBudgetId())
+    if (budget.getId() != null) {
+      return cloudService.deleteBudget(String.format(AUTH_HEADER_FORMAT, token), budget.getId())
           .subscribeOn(Schedulers.from(networkPool));
     } else {
       return Completable.complete();

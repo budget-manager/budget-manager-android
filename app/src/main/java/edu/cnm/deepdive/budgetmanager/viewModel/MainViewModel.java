@@ -3,6 +3,7 @@ package edu.cnm.deepdive.budgetmanager.viewModel;
 import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import edu.cnm.deepdive.budgetmanager.model.Budget;
 import edu.cnm.deepdive.budgetmanager.service.BudgetRepository;
@@ -11,7 +12,6 @@ import io.reactivex.disposables.CompositeDisposable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 public class MainViewModel extends AndroidViewModel {
 
@@ -33,25 +33,20 @@ public class MainViewModel extends AndroidViewModel {
     throwable = new MutableLiveData<>();
     pending = new CompositeDisposable();
     budgetMap = new HashMap<>();
+    refreshBudgets();
   }
 
-//  public LiveData<BudgetWithBudgetAmount> getBudget() {
-//    return budgetRepository.getAll();
-//  }
-
-  public MutableLiveData<Budget> getBudget() {
+  public LiveData<Budget> getBudget() {
     return budget;
   }
 
-  public MutableLiveData<List<Budget>> getBudgets() {
+  public LiveData<List<Budget>> getBudgets() {
     return budgets;
   }
 
-
-  // TODO setup for MainActivity
-//  public LiveData<Throwable> getThrowable() {
-//    return throwable;
-//  }
+  public LiveData<Throwable> getThrowable() {
+    return throwable;
+  }
 
   public void refreshBudgets() {
     throwable.postValue(null);
@@ -63,7 +58,7 @@ public class MainViewModel extends AndroidViewModel {
                       (budgets) -> {
                         this.budgets.postValue(budgets);
                         for (Budget budget : budgets) {
-                          budgetMap.put(budget.getBudgetId(), budget);
+                          budgetMap.put(budget.getId(), budget);
                         }
                       },
                       throwable::postValue

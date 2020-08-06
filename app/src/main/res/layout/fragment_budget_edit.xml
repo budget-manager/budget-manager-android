@@ -58,21 +58,25 @@
 
     <com.google.android.material.textfield.TextInputLayout
       android:id="@+id/start_date_layout"
-      android:layout_width="match_parent"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/full_margin"
       app:hintAnimationEnabled="true"
       app:hintEnabled="true"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/budget_amount_layout"
-      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/end_date_layout"
       >
 
       <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/start_date_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="date"
+        android:inputType="none"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:clickable="true"
+        android:drawableEnd="@drawable/ic_baseline_today"
         android:hint="Date budget should take effect."
         />
 
@@ -80,13 +84,13 @@
 
     <com.google.android.material.textfield.TextInputLayout
       android:id="@+id/end_date_layout"
-      android:layout_width="match_parent"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/full_margin"
       app:hintAnimationEnabled="true"
       app:hintEnabled="true"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/start_date_layout"
+      app:layout_constraintStart_toEndOf="@id/start_date_layout"
+      app:layout_constraintTop_toBottomOf="@id/budget_amount_layout"
       app:layout_constraintEnd_toEndOf="parent"
       >
 
@@ -94,7 +98,11 @@
         android:id="@+id/end_date_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="date"
+        android:inputType="none"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:clickable="true"
+        android:drawableEnd="@drawable/ic_baseline_today"
         android:hint="Date budget should end."
         />
     </com.google.android.material.textfield.TextInputLayout>

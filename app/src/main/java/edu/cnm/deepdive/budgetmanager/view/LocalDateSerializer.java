@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.budgetmanager.view;
 
+import android.util.Log;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -19,7 +20,7 @@ public class LocalDateSerializer
   @Override
   public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
       throws JsonParseException {
-    return (LocalDate) dateFormat.parse(json.getAsString());
+    return dateFormat.parse(json.getAsString(), LocalDate::from);
   }
 
   @Override

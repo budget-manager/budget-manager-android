@@ -1,41 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-  android:id="@+id/budget_list"
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
+  android:padding="@dimen/full_margin"
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
-  <Button
-    android:id="@+id/category"
+  <TextView
+    android:id="@+id/name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Gas"
+    android:layout_margin="@dimen/full_margin"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintEnd_toStartOf="@id/budget_text"
+
     />
 
-  <Button
-    android:id="@+id/budget_text"
+  <TextView
+    android:id="@+id/budgeted_amount"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="100/200"
-    app:layout_constraintStart_toEndOf="@id/category"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintEnd_toStartOf="@id/threshold_percent_display"
+    android:layout_margin="@dimen/full_margin"
+    app:layout_constraintBaseline_toBaselineOf="@id/name"
+    app:layout_constraintEnd_toEndOf="parent"
     />
 
 
   <TextView
-    android:id="@+id/threshold_percent_display"
+    android:id="@+id/start_date"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="50%"
-    android:padding="@dimen/full_margin"
-    app:layout_constraintStart_toEndOf="@id/budget_text"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_margin="@dimen/full_margin"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/name"
+    />
+
+  <TextView
+    android:id="@+id/date_range_separator"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="&#x2013;"
+    android:layout_margin="@dimen/full_margin"
+    app:layout_constraintStart_toEndOf="@id/start_date"
+    app:layout_constraintBaseline_toBaselineOf="@id/start_date"
+    />
+
+  <TextView
+    android:id="@+id/end_date"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/full_margin"
+    app:layout_constraintStart_toEndOf="@id/date_range_separator"
+    app:layout_constraintBaseline_toBaselineOf="@id/start_date"
     />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

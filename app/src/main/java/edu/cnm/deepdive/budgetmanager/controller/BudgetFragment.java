@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import edu.cnm.deepdive.budgetmanager.model.Budget;
@@ -50,7 +49,7 @@ public class BudgetFragment extends Fragment implements BudgetAdapter.OnClickLis
   }
 
   public void onClick(View view, int position, Budget budget) {
-    editBudget(budget.getBudgetId());
+    editBudget(budget.getId());
   }
 
 
