@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import androidx.annotation.NonNull;
@@ -22,6 +21,9 @@ import edu.cnm.deepdive.budgetmanager.viewModel.MainViewModel;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 /**
  * A simple {@link Fragment} subclass. Use the {@link BudgetEditFragment#newInstance} factory method
@@ -33,16 +35,16 @@ public class BudgetEditFragment extends DialogFragment implements TextWatcher {
 
   private long budgetId;
   private View root;
-  private EditText budgetText;
-  private EditText budgetAmount;
   private AlertDialog dialog;
   private MainViewModel viewModel;
   private Budget budget;
   private NumberFormat numberFormat;
-  private DateFormat dateFormat;
-
-  // TODO declare additional fields for all the view objects in the layout. 1 for each widget in fragment_budget.
-
+  private DateTimeFormatter dateFormat;
+  private EditText name;
+  private EditText total;
+  private EditText startDate;
+  private EditText endDate;
+  private EditText note;
 
   public static BudgetEditFragment newInstance(long budgetId) {
     BudgetEditFragment fragment = new BudgetEditFragment();
@@ -64,12 +66,18 @@ public class BudgetEditFragment extends DialogFragment implements TextWatcher {
   @Override
   public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
     numberFormat = NumberFormat.getCurrencyInstance();
-    dateFormat = android.text.format.DateFormat.getDateFormat(getContext());
+    dateFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
     root = LayoutInflater.from(getContext()).inflate(R.layout.fragment_budget_edit, null, false);
-    budgetText = root.findViewById(R.id.budget_text);
-    budgetAmount = root.findViewById(R.id.budget_amount_input);
-    // TODO get refrences to other view objects. find view by id to match fields.
-    budgetText.addTextChangedListener(this);
+    name = root.findViewById(R.id.budget_name_input);
+    total = root.findViewById(R.id.budget_amount_input);
+    startDate = root.findViewById(R.id.start_date_input);
+    endDate = root.findViewById(R.id.end_date_input);
+    note = root.findViewById(R.id.budget_note_input);
+    name.addTextChangedListener(this);
+    total.addTextChangedListener(this);
+    startDate.addTextChangedListener(this);
+    endDate.addTextChangedListener(this);
+    note.addTextChangedListener(this);
     dialog = new AlertDialog.Builder(getContext())
 //        .setIcon(R.drawable.ic_message)
         .setTitle("Edit Budget")
@@ -98,9 +106,11 @@ public class BudgetEditFragment extends DialogFragment implements TextWatcher {
         this.budget = budget;
         if (budget != null) {
           this.budget = budget;
-          budgetText.setText(budget.getName());
-          budgetAmount.setText(numberFormat.format(budget.getBudgetedAmount() / 100D));
-          // TODO set values for rest of the view objects from fields of the budget objects.
+          name.setText(budget.getName());
+          total.setText(numberFormat.format(budget.getBudgetedAmount() / 100D));
+          startDate.setText(dateFormat.format(budget.getStartDate()));
+          endDate.setText(dateFormat.format(budget.getEndDate()));
+          note.setText(budget.getNote());
         }
       });
       viewModel.setBudgetId(budgetId);
@@ -124,16 +134,23 @@ public class BudgetEditFragment extends DialogFragment implements TextWatcher {
 
   private void checkSubmitCondition() {
     Button positive = dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE);
-    positive.setEnabled(!budgetText.getText().toString().trim().isEmpty());
-    // TODO add logic to disable button with other non nullable values
+    positive.setEnabled(
+        !name.getText().toString().trim().isEmpty()
+            && !total.getText().toString().trim().isEmpty()
+            && !startDate.getText().toString().trim().isEmpty()
+            && !endDate.getText().toString().trim().isEmpty()
+            && !note.getText().toString().trim().isEmpty()
+    );
   }
 
   private void save() {
     try {
-      budget.setName(budgetText.getText().toString().trim());
-      String amount = budgetAmount.getText().toString().trim();
+      budget.setName(name.getText().toString().trim());
+      String amount = total.getText().toString().trim();
       budget.setBudgetedAmount((long) (numberFormat.parse(amount).doubleValue() * 100));
-      // TODO do the same thing as above with all the other fields
+      budget.setStartDate((LocalDate) dateFormat.parse(startDate.getText().toString().trim()));
+      budget.setEndDate((LocalDate) dateFormat.parse(endDate.getText().toString().trim()));
+      budget.setNote(note.getText().toString().trim());
       viewModel.save(budget);
     } catch (ParseException e) {
       throw new RuntimeException(e);

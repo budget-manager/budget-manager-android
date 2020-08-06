@@ -95,7 +95,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="date"
-        android:hint="Date budget should take effect."
+        android:hint="Date budget should end."
         />
     </com.google.android.material.textfield.TextInputLayout>
 

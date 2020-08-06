@@ -37,9 +37,6 @@ public class BudgetFragment extends Fragment implements BudgetAdapter.OnClickLis
     return view;
   }
 
-  private void editBudget(int i) {
-  }
-
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
