@@ -5,7 +5,14 @@
   android:layout_height="wrap_content"
   app:cardCornerRadius="@dimen/half_margin"
   android:layout_margin="@dimen/half_margin"
+  android:orientation="vertical"
   xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <androidx.appcompat.widget.LinearLayoutCompat
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/half_margin">
 
   <TextView
     android:id="@+id/transaction_name"
@@ -13,18 +20,38 @@
     android:layout_height="wrap_content"
     android:text="@string/name_of_transaction"
     android:padding="@dimen/half_margin"
-    android:layout_gravity="center_horizontal"
-    app:layout_constraintTop_toTopOf="parent"
+    android:layout_gravity="start"
     />
+
+    <TextView
+      android:id="@+id/transaction_amount"
+      android:layout_height="wrap_content"
+      android:layout_width="wrap_content"
+      android:text="@string/transaction_amount"
+      android:padding="@dimen/half_margin"
+      android:layout_gravity="end"
+      />
 
   <TextView
-    android:id="@+id/transaction_amount"
+    android:id="@+id/transaction_date"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
-    android:text="@string/transaction_amount"
+    android:text="Date"
     android:padding="@dimen/half_margin"
-    android:layout_gravity="end"
+    android:layout_gravity="start"
     />
 
+    <TextView
+      android:id="@+id/note"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Note"
+      android:padding="@dimen/half_margin"
+      android:layout_gravity="start"
+      />
 
+
+
+
+  </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.cardview.widget.CardView>

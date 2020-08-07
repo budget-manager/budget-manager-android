@@ -8,18 +8,17 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   tools:context=".controller.TransactionFragment">
 
-  <TextView
-    android:id="@+id/goal_threshold_percent"
+  <Button
+    android:id="@+id/budget_threshold_percent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="35% of Goal"
+    android:text="35% of Budget Used"
     android:textSize="25sp"
     android:gravity="center"
-    android:paddingVertical="@dimen/full_margin"
-    android:layout_marginTop="@dimen/full_margin"
+    android:layout_margin="@dimen/full_margin"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toTopOf="@id/budget_list"
-    />
+    app:layout_constraintBottom_toTopOf="@id/transaction_list"
+    app:layout_constraintStart_toStartOf="parent"/>
 
 
 
@@ -33,6 +32,7 @@
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     android:orientation="vertical"
     android:background="#FFE0E0E0"
+    app:layout_constraintTop_toBottomOf="@id/budget_threshold_percent"
     android:padding="@dimen/half_margin"/>
 
 

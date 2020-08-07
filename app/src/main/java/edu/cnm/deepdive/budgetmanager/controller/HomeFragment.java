@@ -28,13 +28,17 @@ public class HomeFragment extends Fragment {
       Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_home, container, false);
     Button budgetButton = view.findViewById(R.id.budgets_button);
+    Button createTransactionButton = view.findViewById(R.id.create_transaction_button);
     Button transactionButton = view.findViewById(R.id.transaction_button);
 
     budgetButton.setOnClickListener(
         (v) -> Navigation.findNavController(v).navigate(HomeFragmentDirections.homeToBudgets()));
 
-    transactionButton.setOnClickListener(
+    createTransactionButton.setOnClickListener(
         (v) -> Navigation.findNavController(v).navigate(HomeFragmentDirections.homeToCreateTransaction()));
+
+    transactionButton.setOnClickListener(
+        (v) -> Navigation.findNavController(v).navigate(HomeFragmentDirections.homeToTransaction()));
     return view;
   }
 

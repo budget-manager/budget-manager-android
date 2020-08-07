@@ -2,13 +2,14 @@ package edu.cnm.deepdive.budgetmanager.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.SurfaceControl.Transaction;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import edu.cnm.deepdive.budgetmanager.R;
+import edu.cnm.deepdive.budgetmanager.controller.TransactionFragment;
+import edu.cnm.deepdive.budgetmanager.model.Transaction;
 import java.util.List;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.Holder> {
@@ -19,11 +20,11 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
   public TransactionAdapter(Context context, List<Transaction> transactions,
       OnClickListener clickListener) {
-    super();
     this.context = context;
     this.transactions = transactions;
     this.clickListener = clickListener;
   }
+
 
   public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     View view = LayoutInflater.from(context).inflate(R.layout.item_transaction, parent, false);

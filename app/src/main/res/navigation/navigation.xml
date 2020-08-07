@@ -33,6 +33,10 @@
     <action
       android:id="@+id/home_to_create_transaction"
       app:destination="@id/navigation_create_transaction"/>
+
+    <action
+      android:id="@+id/home_to_transaction"
+      app:destination="@id/navigation_transaction"/>
   </fragment>
 
   <fragment
@@ -69,8 +73,12 @@
     tools:layout="@layout/fragment_create_transaction">
 
     <action
-      android:id="@+id/transaction_to_budget"
-      app:destination="@id/navigation_budget"/>
+      android:id="@+id/create_transaction_to_transaction"
+      app:destination="@id/navigation_transaction"/>
+
+    <action
+      android:id="@+id/create_transaction_to_home"
+      app:destination="@id/navigation_home"/>
 
   </fragment>
 

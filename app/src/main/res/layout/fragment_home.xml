@@ -5,8 +5,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".controller.HomeFragment"
-  android:background="@color/gray">
+  tools:context=".controller.HomeFragment">
 
   <TextView
     android:id="@+id/welcome_message"
@@ -24,25 +23,39 @@
 
   <Button
     android:id="@+id/budgets_button"
-    android:layout_width="wrap_content"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/full_margin"
+    android:layout_margin="10dp"
+    app:layout_constraintWidth_percent="0.6"
     android:text="Budgets"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/welcome_message"
     app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/create_transaction_button"
+    />
+
+  <Button
+    android:id="@+id/create_transaction_button"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    app:layout_constraintWidth_percent="0.6"
+    android:text="New Transaction"
+    android:layout_margin="10dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/budgets_button"
+    app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintBottom_toTopOf="@id/transaction_button"
     />
 
-
   <Button
     android:id="@+id/transaction_button"
-    android:layout_width="wrap_content"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/full_margin"
+    app:layout_constraintWidth_percent="0.6"
     android:text="Transactions"
+    android:layout_margin="10dp"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/budgets_button"
+    app:layout_constraintTop_toBottomOf="@id/create_transaction_button"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintBottom_toTopOf="@id/pie_chart"
     />
@@ -56,7 +69,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/transaction_button"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    />
+    app:layout_constraintBottom_toBottomOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
