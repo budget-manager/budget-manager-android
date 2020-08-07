@@ -49,7 +49,7 @@ public class CreateTransactionFragment extends Fragment {
     saveButton.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View view) {
-        Navigation.findNavController(view).navigate(R.id.create_transaction_to_budget);
+        Navigation.findNavController(view).navigate(R.id.create_transaction_to_transaction);
       }
     });
     return view;

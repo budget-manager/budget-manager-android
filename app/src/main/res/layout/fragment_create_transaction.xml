@@ -5,8 +5,7 @@
   android:layout_height="match_parent"
   android:layout_margin="@dimen/full_margin"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:background="@color/gray">
+  xmlns:tools="http://schemas.android.com/tools">
 
 
   <com.google.android.material.textfield.TextInputLayout
