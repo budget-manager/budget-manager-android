@@ -38,7 +38,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/threshold_percent_tracked"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toTopOf="@id/budget_category"
+    app:layout_constraintBottom_toTopOf="@id/budget_list"
     />
 
   <TextView
