@@ -49,42 +49,42 @@
     app:layout_constraintStart_toEndOf="@id/monthly_budget"
     app:layout_constraintTop_toBottomOf="@id/long_term_goal"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toTopOf="@id/budget_category"
+    app:layout_constraintBottom_toTopOf="@id/budget_list"
     />
 
 
-  <TextView
-    android:id="@+id/budget_category"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Name of Budget"
-    android:padding="@dimen/full_margin"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/monthly_budget"
-    app:layout_constraintEnd_toStartOf="@id/budget_current_total"
-    app:layout_constraintBottom_toTopOf="@id/budget_list"/>
+<!--  <TextView-->
+<!--    android:id="@+id/budget_category"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:text="Name of Budget"-->
+<!--    android:padding="@dimen/full_margin"-->
+<!--    app:layout_constraintStart_toStartOf="parent"-->
+<!--    app:layout_constraintTop_toBottomOf="@id/monthly_budget"-->
+<!--    app:layout_constraintEnd_toStartOf="@id/budget_current_total"-->
+<!--    app:layout_constraintBottom_toTopOf="@id/budget_list"/>-->
 
-  <TextView
-    android:id="@+id/budget_current_total"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="10/20"
-    android:padding="@dimen/full_margin"
-    app:layout_constraintStart_toEndOf="@id/budget_category"
-    app:layout_constraintTop_toBottomOf="@id/monthly_budget"
-    app:layout_constraintEnd_toStartOf="@id/threshold_percent_showable"
-    app:layout_constraintBottom_toTopOf="@id/budget_list"/>
+<!--  <TextView-->
+<!--    android:id="@+id/budget_current_total"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:text="10/20"-->
+<!--    android:padding="@dimen/full_margin"-->
+<!--    app:layout_constraintStart_toEndOf="@id/budget_category"-->
+<!--    app:layout_constraintTop_toBottomOf="@id/monthly_budget"-->
+<!--    app:layout_constraintEnd_toStartOf="@id/threshold_percent_showable"-->
+<!--    app:layout_constraintBottom_toTopOf="@id/budget_list"/>-->
 
-  <TextView
-    android:id="@+id/threshold_percent_showable"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="50%"
-    android:padding="@dimen/full_margin"
-    app:layout_constraintStart_toEndOf="@id/budget_current_total"
-    app:layout_constraintTop_toBottomOf="@id/monthly_budget"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toTopOf="@id/budget_list"/>
+<!--  <TextView-->
+<!--    android:id="@+id/threshold_percent_showable"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:text="50%"-->
+<!--    android:padding="@dimen/full_margin"-->
+<!--    app:layout_constraintStart_toEndOf="@id/budget_current_total"-->
+<!--    app:layout_constraintTop_toBottomOf="@id/monthly_budget"-->
+<!--    app:layout_constraintEnd_toEndOf="parent"-->
+<!--    app:layout_constraintBottom_toTopOf="@id/budget_list"/>-->
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/budget_list"
@@ -96,7 +96,7 @@
     android:background="#FFE0E0E0"
     android:padding="@dimen/half_margin"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/budget_category"
+    app:layout_constraintTop_toBottomOf="@id/monthly_budget_current_vs_total"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
     />
