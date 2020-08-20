@@ -13,7 +13,10 @@ import android.view.ViewGroup;
 import androidx.navigation.Navigation;
 import edu.cnm.deepdive.budgetmanager.R;
 import edu.cnm.deepdive.budgetmanager.model.Transaction;
-import edu.cnm.deepdive.budgetmanager.viewmodel.BudgetViewModel;
+import edu.cnm.deepdive.budgetmanager.viewmodel.TransactionViewModel;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.time.LocalDateTime;
 
 
 /**
@@ -23,13 +26,15 @@ public class CreateTransactionFragment extends Fragment {
 
   private long transactionId;
   private View view;
-  private EditText transactionName;
+  private EditText name;
   private EditText budgetCategory;
-  private EditText transactionAmount;
-  private EditText transactionDate;
-  private EditText transactionNote;
-  private BudgetViewModel viewModel;
+  private EditText amount;
+  private EditText date;
+  private EditText note;
+  private TransactionViewModel viewModel;
   private Transaction transaction;
+  private NumberFormat numberFormat;
+
 
 
   @Override
@@ -59,6 +64,22 @@ public class CreateTransactionFragment extends Fragment {
   public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
 
+  }
+
+  private void save() {
+    try {
+      transaction.setName(name.getText().toString().trim());
+      String price = amount.getText().toString().trim();
+      transaction.setAmount((long) (numberFormat.parse(String.valueOf(amount)).doubleValue() * 100));
+//      transaction.setDate(LocalDateTime.ofInstant(date.toInstant(),
+//          date.getTimeZone().toZoneId()).toLocalDate());
+//      budget.setEndDate(LocalDateTime.ofInstant(end.toInstant(),
+//          end.getTimeZone().toZoneId()).toLocalDate());
+//      budget.setNote(note.getText().toString().trim());
+      viewModel.save(transaction);
+    } catch (ParseException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   public interface OnFragmentInteractionListenerHome {
