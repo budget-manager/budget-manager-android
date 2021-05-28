@@ -12,51 +12,51 @@
     android:textStyle="bold"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:textSize="25dp"
     android:layout_margin="@dimen/welcome_space"
+    android:background="#D8D2D2"
     android:text="Welcome!"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
+    android:textSize="40dp"
     app:layout_constraintBottom_toTopOf="@id/budgets_button"
-    />
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"/>
 
   <Button
     android:id="@+id/budgets_button"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    app:layout_constraintWidth_percent="0.6"
-    android:text="Budgets"
+    android:text="View and edit your budgets"
+    app:layout_constraintBottom_toTopOf="@id/create_transaction_button"
+    app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/welcome_message"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toTopOf="@id/create_transaction_button"
+    app:layout_constraintWidth_percent="0.6"
     />
 
   <Button
     android:id="@+id/create_transaction_button"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    app:layout_constraintWidth_percent="0.6"
-    android:text="New Transaction"
     android:layout_margin="10dp"
+    android:text="Enter a new transaction"
+    app:layout_constraintBottom_toTopOf="@id/transaction_button"
+    app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/budgets_button"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toTopOf="@id/transaction_button"
+    app:layout_constraintWidth_percent="0.6"
     />
 
   <Button
     android:id="@+id/transaction_button"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    app:layout_constraintWidth_percent="0.6"
-    android:text="Transactions"
     android:layout_margin="10dp"
+    android:text="View transactions"
+    app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/create_transaction_button"
-    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintWidth_percent="0.6"
     />
 
 
